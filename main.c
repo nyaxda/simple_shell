@@ -3,11 +3,11 @@
 int main(void)
 {
 	int size = 128;
-	char prompt[] = malloc(sizeof(char) * size);
+	char *prompt = malloc(sizeof(char) * size);
 
 	if (prompt == NULL)
 	{
-		return
+		return (NULL);
 	}
 	while (1)
 	{
