@@ -7,7 +7,7 @@ int main(void)
 
 	if (prompt == NULL)
 	{
-		return (NULL);
+		return (0);
 	}
 	while (1)
 	{
