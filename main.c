@@ -7,7 +7,7 @@
 int main(void)
 {
 	int size = 1024;
-	char *arrstore = malloc(sizeof(char) * 1024);
+	char **arrstore = malloc(sizeof(char) * 1024);
 	char *prompt = malloc(sizeof(char) * 1024);
 
 	if (arrstore == NULL || prompt == NULL)
