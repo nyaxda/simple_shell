@@ -11,3 +11,37 @@ void printer(const char *msg)
 {
 	write(STDOUT_FILENO, msg, strlen(msg));
 }
+
+/**
+ * snfprinter - custom snfprintf
+ *
+ * @print: The buffer to store the resulting string.
+ * @size: The size of the str buffer.
+ * @format: The format string containing "%s" placeholders.
+ * @insert: The string to be inserted.
+ */
+
+void snfprinter(char *print, size_t size, const char *format, const char *insert)
+{
+	const char *f = format;
+	char *s = print;
+	size_t len = strlen(insert);
+
+	while (*f != '\0' && (s - print) < size)
+	{
+		if (*f == '%' && *(f + 1) == 's')
+		{
+			if ((s - print) + len < size)
+			{
+				strcpy(s, insert);
+				s += len;
+			}
+			f += 2;
+		}
+		else
+		{
+			*s++ = *f++;
+		}
+	}
+	*s = '\0';
+}
