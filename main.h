@@ -13,6 +13,6 @@ void prompter(void);
 void printer(const char *msg);
 char **input_text(char *prompt, size_t extent);
 void snprinter(char *str, size_t extent, const char *format, ...);
-void executor(const char **arrstore);
+void executor(char *const arrstore);
 
 #endif /*MAIN_H_*/
