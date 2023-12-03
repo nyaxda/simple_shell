@@ -2,17 +2,25 @@
 
 int main(void)
 {
-	int size = 128;
-	char *prompt = malloc(sizeof(char) * size);
+	int size = 1024;
+	char **arrstore = malloc(sizeof(char) * 1024);
+	char *prompt = malloc(sizeof(char) * 1024);
 
-	if (prompt == NULL)
+	if (arrstore == NULL || prompt == NULL)
 	{
 		return (0);
 	}
 	while (1)
 	{
 		prompter();
-		input_text(prompt, sizeof(prompt));
-
+		arrstore = input_text(prompt, size);
+		if (arrstore == NULL)
+		{
+			return (0);
+		}
+		executor((const char **)arrstore);
+		free(arrstore);
 	}
+	free(prompt);
+	return (0);
 }
