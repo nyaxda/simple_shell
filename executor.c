@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * executor -executes a command by forking a child process
+ * and using execve to run the command.
+ * @arrstore: The array of command arguments to be executed.
+ * Return: void
+ */
 void executor(const char **arrstore)
 {
 	int status;
