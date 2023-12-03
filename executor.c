@@ -6,7 +6,7 @@
  * @arrstore: The array of command arguments to be executed.
  * Return: void
  */
-void executor(const char **arrstore)
+void executor(char *const arrstore)
 {
 	int status;
 	pid_t child_process_id = fork();

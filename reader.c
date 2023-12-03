@@ -13,7 +13,7 @@
  */
 char **input_text(char *prompt, size_t extent)
 {
-	char *placeholder, **arrstore;
+	char *placeholder, *arrstore;
 	int i = 0;
 
 	if (getline(&prompt, &extent, stdin) == -1)
