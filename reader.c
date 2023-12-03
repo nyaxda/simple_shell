@@ -11,21 +11,30 @@
  *
  * Return: void
  */
-void input_text(char *prompt, size_t extent)
+char **input_text(char *prompt, size_t extent)
 {
-	if (fgets(prompt, extent, stdin) == NULL)
+	char *placeholder, **arrstore;
+	int i = 0;
+
+	if (getline(&prompt, &extent, stdin) == -1)
 	{
-		if (feof(stdin))
-		{
-			printer("End of input reached.\n");
-			exit(0);
-		}
-		else
-		{
-			perror("fgets");
-			exit(1);
-		}
+		perror("getline error");
+		return (NULL);
 	}
-	/*Replacing new line with null termination*/
-	prompt[strcspn(prompt,"\n")] = '\0';
+	placeholder = strtok(prompt, "\t\n");
+	arrstore = malloc(sizeof (char *) * 1024);
+	if (arrstore == NULL)
+	{
+		return (NULL);
+	}
+
+	while (placeholder)
+	{
+		arrstore[i] = placeholder;
+		placeholder = strtok(NULL, "\t\n");
+		i++;
+	}
+	arrstore[i] = NULL;
+	i = 0;
+	return (arrstore);
 }
