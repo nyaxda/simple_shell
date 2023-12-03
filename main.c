@@ -1,5 +1,9 @@
-#include "main.h"
+#include "main.h"\
 
+/**
+ * main - entry point of the program
+ * return - 0 (success)
+*/
 int main(void)
 {
 	int size = 1024;
