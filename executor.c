@@ -18,5 +18,5 @@ void executor(const char **arrstore)
     }
     else
         wait(&status);
-    snprinter(prompt_path, sizeof(prompt_path),"/bin/%s", prompt);
+    snfprinter(prompt_path, sizeof(prompt_path),"/bin/%s", prompt);
 }
