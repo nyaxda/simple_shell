@@ -8,5 +8,5 @@
  */
 void prompter(void)
 {
-    printer("($) ");
+	printer("($) ");
 }

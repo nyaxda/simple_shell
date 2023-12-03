@@ -22,7 +22,7 @@ char **input_text(char *prompt, size_t extent)
 		return (NULL);
 	}
 	placeholder = strtok(prompt, "\t\n");
-	arrstore = malloc(sizeof (char *) * 1024);
+	arrstore = malloc(sizeof(char *) * 1024);
 	if (arrstore == NULL)
 	{
 		return (NULL);

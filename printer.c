@@ -3,7 +3,8 @@
 /**
  * printer - Prints the given message to the standard output.
  *
- * This function writes the provided message to the standard output file descriptor.
+ * This function writes the provided message to the
+ * standard output file descriptor.
  * @msg: The message to be printed.
  * Return: void.
  */
@@ -21,26 +22,27 @@ void printer(const char *msg)
  * @insert: The string to be inserted.
  */
 
-void snfprinter(char *print, size_t size, const char *format, const char *insert)
+void snfprinter(char *print, size_t size, const char *format,
+const char *insert)
 {
-	const char *f = format;
+	const char *g = format;
 	char *s = print;
 	size_t len = strlen(insert);
 
-	while (*f != '\0' && (s - print) < size)
+	while (*g != '\0' && (s - print) < size)
 	{
-		if (*f == '%' && *(f + 1) == 's')
+		if (*g == '%' && *(g + 1) == 's')
 		{
 			if ((s - print) + len < size)
 			{
 				strcpy(s, insert);
 				s += len;
 			}
-			f += 2;
+			g += 2;
 		}
 		else
 		{
-			*s++ = *f++;
+			*s++ = *g++;
 		}
 	}
 	*s = '\0';
