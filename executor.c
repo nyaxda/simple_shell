@@ -24,6 +24,10 @@ void executor(const char **arrstore)
 	}
 	else if (child_process_id == 0)
 	{
+		if (strcmp(arrstore[0], "env") == 0)
+		{
+			_getenviron(NULL);
+		}
 		/*child process occurs here*/
 		if (arrstore[0][0] == '/')
     	{
