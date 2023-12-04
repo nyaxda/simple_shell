@@ -19,7 +19,7 @@ void executor(const char **arrstore)
 	else if (child_process_id == 0)
 	{
 		/*child process occurs here*/
-		if (execve(arrstore[0], arrstore, NULL) == -1)
+		if (execve(arrstore[0], (char * const *)arrstore, NULL) == -1)
 			perror("Error:");
 	}
 	else
