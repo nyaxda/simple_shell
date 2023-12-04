@@ -18,14 +18,14 @@ void executor(const char **arrstore)
 	}
 	if (child_process_id == -1) /* child process has failed to initiate*/
 	{
-		perror("Error:");
+		perror("Error");
 		exit(1);
 	}
 	else if (child_process_id == 0)
 	{
 		/*child process occurs here*/
 		if (execve(arrstore[0], (char * const *)arrstore, NULL) == -1)
-			perror("Error:");
+			perror("Error");
 	}
 	else
 		wait(&status);
