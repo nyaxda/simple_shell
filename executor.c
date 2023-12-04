@@ -25,8 +25,10 @@ void executor(const char **arrstore)
 	{
 		/*child process occurs here*/
 		if (execve(arrstore[0], (char * const *)arrstore, NULL) == -1)
+		{
 			perror("Error");
 			return;
+		}
 	}
 	else
 		wait(&status);
