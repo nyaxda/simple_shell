@@ -49,7 +49,7 @@ char *str_concat(char *s1, char *s2)
 			m[i] = s2[i - len_s1];
 			i++;
 		}
-		m[i] = '\0'; // Ensure the string is null-terminated
+		m[i] = '\0';
 	}
 	return (m);
 }
