@@ -29,7 +29,7 @@ const char *insert)
 	char *s = print;
 	size_t len = strlen(insert);
 
-	while (*g != '\0' && (s - print) < size)
+	while (*g != '\0' && (size_t)(s - print) < size)
 	{
 		if (*g == '%' && *(g + 1) == 's')
 		{
