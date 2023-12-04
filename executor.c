@@ -8,10 +8,11 @@
  */
 void executor(const char **arrstore)
 {
-	int status, i;
+	int status
+	size_t i;
 	pid_t child_process_id = fork();
 	char prompt_path[1024];
-	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"}
+	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
 	if (strcmp(arrstore[0], "exit") == 0)
 	{
