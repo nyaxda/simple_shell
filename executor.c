@@ -15,9 +15,7 @@ void executor(const char **arrstore)
 	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
 	if (strcmp(arrstore[0], "exit") == 0)
-	{
 		exit(0);
-	}
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
@@ -27,15 +25,25 @@ void executor(const char **arrstore)
 	else if (child_process_id == 0)
 	{
 		/*child process occurs here*/
-		for(i = 0; i < sizeof(directories)/sizeof(directories[0]); i++)
+		if (arrstore[0][0] == '/')
+    	{
+        	/* If the command starts with '/', assume it's an absolute path */
+        	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
+        	execve(prompt_path, (char * const *)arrstore, NULL);
+    	}
+    	else
 		{
-			/*looking for filename PATH*/
-			snfprinter(prompt_path, sizeof(prompt_path), "%s/", directories[i]);
-			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path)
-			- strlen(prompt_path), "%s", arrstore[0]);
-			if (execve(prompt_path, (char * const *)arrstore, NULL) != -1)
+			for(i = 0; i < sizeof(directories)/sizeof(directories[0]); i++)
 			{
-				break;
+				/*looking for filename PATH*/
+				snfprinter(prompt_path, sizeof(prompt_path), "%s/",
+				directories[i]);
+				snfprinter(prompt_path + strlen(prompt_path),
+				sizeof(prompt_path)- strlen(prompt_path), "%s", arrstore[0]);
+				if (execve(prompt_path, (char * const *)arrstore, NULL) != -1)
+				{
+					break;
+				}
 			}
 		}
 		if (i == sizeof(directories)/sizeof(directories[0]))
