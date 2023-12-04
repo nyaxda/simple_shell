@@ -10,7 +10,7 @@ char *_getenviron(const char *current)
     extern char **environ;
     char *value;
     char *name;
-    char *output = NULL, *temp, buffer[1024], temp_buffer[1024], ooutput;
+    char *output = NULL, *temp, buffer[1024], temp_buffer[1024], *ooutput;
     int i = 0;
     size_t size, temp_size;
 
@@ -37,7 +37,7 @@ char *_getenviron(const char *current)
                 }
                 ooutput = output;
                 output = str_concat(output, temp);
-                free(old_output);
+                free(ooutput);
                 free(temp);
             }
         }
