@@ -23,7 +23,7 @@ char *_getenviron(const char *current)
             if (name)
             {
                 size = sizeof(buffer);
-                snfprinter(buffer, size, "%s\n", name);
+                snfprinter(buffer, size, "%s", name);
                 output = strdup(buffer);
                 if (!output)
                 {
@@ -33,7 +33,7 @@ char *_getenviron(const char *current)
                 if (value)
                 {
                     temp_size = sizeof(temp_buffer);
-                    snfprinter(temp_buffer, temp_size, "%s\n", value);
+                    snfprinter(temp_buffer, temp_size, "=%s\n", value);
                     temp = strdup(temp_buffer);
                     if (!temp)
                     {
