@@ -8,15 +8,20 @@
 char *_getenviron(const char *current)
 {
     extern char **environ;
-    char *value;
-    char *name;
+    char *value, *environ_var, *name;
     char *output = NULL, *temp, buffer[1024], temp_buffer[1024], *ooutput;
     int i = 0;
     size_t size, temp_size;
 
     while(environ [i])
     {
-        name = strtok(environ[i], "=");
+        enviro_var = strdup(environ[i]);
+        if (!environ_var)
+        {
+            perror("Error");
+            return (NULL);
+        }
+        name = strtok(environ_var, "=");
         value = strtok(NULL, "=");
         if (current == NULL || (name && strcmp(name,current) == 0))
         {
@@ -56,6 +61,7 @@ char *_getenviron(const char *current)
                 free(temp);
             }
         }
+        free(env_var);
         i++;
     }
     return (output);
