@@ -23,7 +23,11 @@ int main(void)
 			free(prompt);
 			return (0);
 		}
-		executor((const char **)arrstore);
+		/*checking if the command is not empty*/
+		if (arrstore[0] != NULL)
+		{
+			executor((const char **)arrstore);
+		}
 		free(arrstore);
 	}
 	free(prompt);
