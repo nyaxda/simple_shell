@@ -25,19 +25,34 @@ char *_getenviron(const char *current)
                 size = sizeof(buffer);
                 snfprinter(buffer, size, "%s\n", name);
                 output = strdup(buffer);
+                if (!output)
+                {
+                    perror("Error");
+                    return (NULL);
+                }
                 if (value)
                 {
                     temp_size = sizeof(temp_buffer);
                     snfprinter(temp_buffer, temp_size, "%s\n", value);
                     temp = strdup(temp_buffer);
+                    if (!temp)
+                    {
+                        perror("Error");
+                        return (NULL);
+                    }
                 }
                 else
                 {
                     temp = strdup("=\n");
+                    if (!temp)
+                    {
+                        perror("Error");
+                        return (NULL);
+                    }
                 }
-                ooutput = output;
-                output = str_concat(output, temp);
-                free(ooutput);
+                ooutput =str_concat(output, temp);
+                free(output);
+                output = ooutput;
                 free(temp);
             }
         }
