@@ -6,17 +6,19 @@
  * @arrstore: The array of command arguments to be executed.
  * Return: void
  */
-void executor(const char **arrstore)
+void executor(const char **arrstore, char **env)
 {
-	int status;
+	int status, i;
 	pid_t child_process_id = fork();
 	char prompt_path[1024];
+	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"}
 
 	if (strcmp(arrstore[0], "exit") == 0)
 	{
 		exit(0);
 	}
-	if (child_process_id == -1) /* child process has failed to initiate*/
+	/* child process has failed to initiate*/
+	if (child_process_id == -1)
 	{
 		perror("Error");
 		exit(1);
@@ -24,7 +26,16 @@ void executor(const char **arrstore)
 	else if (child_process_id == 0)
 	{
 		/*child process occurs here*/
-		if (execve(arrstore[0], (char * const *)arrstore, NULL) == -1)
+		for(i = 0; i < sizeof(directories)/sizeof(directories[0]); i++)
+		{
+			/*looking for filename PATH*/
+			snfprinter(prompt_path, "%s/%s", directories[i], arrstone[0])
+			if (execve(prompt_path, (char * const *)arrstore, env, NULL) != -1)
+			{
+				break;
+			}
+		}
+		if (i == sizeof(directories)/sizeof(directories[0]))
 		{
 			perror("Error");
 			/*free arrstore memory and exit the child process*/
@@ -34,5 +45,5 @@ void executor(const char **arrstore)
 	}
 	else
 		wait(&status);
-	snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);
+	/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }
