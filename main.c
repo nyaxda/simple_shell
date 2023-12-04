@@ -17,7 +17,7 @@ int main(void)
 	while (1)
 	{
 		prompter();
-		for (i = 0, i < size; i++)
+		for (i = 0; i < size; i++)
 		{
 			/*clearing arrstore in case of any errors*/
 			arrstore[i] = NULL;
