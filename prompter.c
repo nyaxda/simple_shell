@@ -8,5 +8,8 @@
  */
 void prompter(void)
 {
-	printer("($) ");
+	if (isatty(STDIN_FILENO))
+	{
+		printer("($) ");
+	}
 }
