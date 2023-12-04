@@ -18,7 +18,8 @@ int main(void)
 	{
 		prompter();
 		arrstore = input_text(prompt, size);
-		if (arrstore == NULL)
+		if (arrstore == NULL || (arrstore[0] != NULL &&
+		strcmp(arrstore[0], "exit") == 0)
 		{
 			return (0);
 		}
