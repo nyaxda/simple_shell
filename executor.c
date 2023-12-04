@@ -10,6 +10,7 @@ void executor(const char **arrstore)
 {
 	int status;
 	pid_t child_process_id = fork();
+	char prompt_path[1024];
 
 	if (child_process_id == -1) /* child process has failed to initiate*/
 	{
@@ -24,5 +25,5 @@ void executor(const char **arrstore)
 	}
 	else
 		wait(&status);
-	snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", prompt);
+	snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);
 }
