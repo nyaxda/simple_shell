@@ -18,8 +18,16 @@ char **input_text(char *prompt, size_t extent)
 
 	if (getline(&prompt, &extent, stdin) == -1)
 	{
-		perror("getline error");
-		return (NULL);
+		/*check if it's end of file and there is no more input*/
+		if (feof(stdin))
+		{
+			return (NULL);
+		}
+		else
+		{
+			perror("getline error");
+			return (NULL);
+		}
 	}
 	placeholder = strtok(prompt, "\t\n");
 	arrstore = malloc(sizeof(char *) * 1024);
