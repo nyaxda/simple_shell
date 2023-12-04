@@ -17,14 +17,16 @@ int main(void)
 	while (1)
 	{
 		prompter();
-		for (i = 0; i < size; i++)
-		{
-			/*clearing arrstore in case of any errors*/
-			arrstore[i] = NULL;
-		}
 		arrstore = input_text(prompt, size);
 		if (arrstore == NULL)
 		{
+			free(prompt);
+			return (0);
+		}
+		else if (arrstore[0] != NULL && strcmp(arrstore[0], "exit") == 0)
+		{
+			free(arrstore);
+			free(prompt);
 			return (0);
 		}
 		executor((const char **)arrstore);
