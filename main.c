@@ -22,11 +22,6 @@ int main(void)
 		{
 			return (0);
 		}
-		else if (arrstore[0] != NULL && strcmp(arrstore[0], "exit") == 0)
-		{
-			free(arrstore);
-			return (0);
-		}
 		executor((const char **)arrstore);
 		free(arrstore);
 	}
