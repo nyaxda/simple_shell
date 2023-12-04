@@ -29,7 +29,12 @@ void executor(const char **arrstore)
     	{
         	/* If the command starts with '/', assume it's an absolute path */
         	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
-        	execve(prompt_path, (char * const *)arrstore, NULL);
+        	if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
+			{
+				perror("Error");
+				free(arrstore);
+				exit(0);
+			}
     	}
     	else
 		{
