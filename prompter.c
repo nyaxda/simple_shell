@@ -8,6 +8,7 @@
  */
 void prompter(void)
 {
+	/*checks if a stdin is a terminal*/
 	if (isatty(STDIN_FILENO))
 	{
 		printer("($) ");
