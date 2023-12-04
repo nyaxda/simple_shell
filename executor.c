@@ -6,7 +6,7 @@
  * @arrstore: The array of command arguments to be executed.
  * Return: void
  */
-void executor(const char **arrstore, char **env)
+void executor(const char **arrstore)
 {
 	int status, i;
 	pid_t child_process_id = fork();
@@ -30,7 +30,7 @@ void executor(const char **arrstore, char **env)
 		{
 			/*looking for filename PATH*/
 			snfprinter(prompt_path, "%s/%s", directories[i], arrstone[0])
-			if (execve(prompt_path, (char * const *)arrstore, env, NULL) != -1)
+			if (execve(prompt_path, (char * const *)arrstore, NULL) != -1)
 			{
 				break;
 			}
