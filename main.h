@@ -12,7 +12,8 @@
 void prompter(void);
 void printer(const char *msg);
 char **input_text(char *prompt, size_t extent);
-void snfprinter(char *str, size_t extent, const char *format, ...);
+void snfprinter(char *print, size_t size, const char *format,
+const char *insert);
 void executor(const char **arrstore);
 
 #endif /*MAIN_H_*/
