@@ -12,6 +12,10 @@ void executor(const char **arrstore)
 	pid_t child_process_id = fork();
 	char prompt_path[1024];
 
+	if (strcmp(arrstore[0], "exit") == 0)
+	{
+		exit(0);
+	}
 	if (child_process_id == -1) /* child process has failed to initiate*/
 	{
 		perror("Error:");
