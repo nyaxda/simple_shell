@@ -27,7 +27,9 @@ void executor(const char **arrstore)
 		if (execve(arrstore[0], (char * const *)arrstore, NULL) == -1)
 		{
 			perror("Error");
-			return;
+			/*free arrstore memory and exit the child process*/
+			free(arrstore);
+			exit(0);
 		}
 	}
 	else

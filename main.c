@@ -23,12 +23,6 @@ int main(void)
 			free(prompt);
 			return (0);
 		}
-		else if (arrstore[0] != NULL && strcmp(arrstore[0], "exit") == 0)
-		{
-			free(arrstore);
-			free(prompt);
-			return (0);
-		}
 		executor((const char **)arrstore);
 		free(arrstore);
 	}
