@@ -30,7 +30,9 @@ void executor(const char **arrstore)
 		for(i = 0; i < sizeof(directories)/sizeof(directories[0]); i++)
 		{
 			/*looking for filename PATH*/
-			snfprinter(prompt_path, "%s/%s", directories[i], arrstore[0])
+			snfprinter(prompt_path, sizeof(prompt_path), "%s/", directories[i]);
+			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path)
+			- strlen(prompt_path), "%s", arrstore[0]);
 			if (execve(prompt_path, (char * const *)arrstore, NULL) != -1)
 			{
 				break;
