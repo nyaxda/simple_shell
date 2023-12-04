@@ -15,7 +15,7 @@ char *_getenviron(const char *current)
 
     while(environ [i])
     {
-        enviro_var = strdup(environ[i]);
+        environ_var = strdup(environ[i]);
         if (!environ_var)
         {
             perror("Error");
@@ -61,7 +61,7 @@ char *_getenviron(const char *current)
                 free(temp);
             }
         }
-        free(env_var);
+        free(environ_var);
         i++;
     }
     return (output);
