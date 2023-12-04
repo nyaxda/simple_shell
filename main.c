@@ -6,7 +6,7 @@
 */
 int main(void)
 {
-	int size = 1024;
+	int size = 1024, i;
 	char **arrstore = malloc(sizeof(char) * 1024);
 	char *prompt = malloc(sizeof(char) * 1024);
 
@@ -17,6 +17,11 @@ int main(void)
 	while (1)
 	{
 		prompter();
+		for (i = 0, i < size; i++)
+		{
+			/*clearing arrstore in case of any errors*/
+			arrstore[i] = NULL;
+		}
 		arrstore = input_text(prompt, size);
 		if (arrstore == NULL)
 		{
