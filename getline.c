@@ -25,7 +25,7 @@ ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
         {
             buff_size *= INCREMENT_BUFFER_FACTOR;
             rem_buff_size = buff_size - buff_offset;
-            buffer = cust_realoc(buffer, buff_size);
+            buffer = cust_realoc(buffer, old_size, buff_size);
             if (buffer == NULL)
                 return (-1);
         }
