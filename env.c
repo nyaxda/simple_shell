@@ -59,7 +59,7 @@ char *_getenviron(const char *current)
 				}
 				else
 				{
-					temp = strdup("=\n");
+					temp = strdup("");
 					if (!temp)
 					{
 						perror("Error");
