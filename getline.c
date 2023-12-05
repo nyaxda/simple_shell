@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * cust_getline - custom getline function
+ * @pointer: buffer to store string.
+ * @n: size in bytes of the buffer.
+ * @strm: stream to read from.
+ * Return: number of bytes read., -1 on failure. 
+*/
 ssize_t *cust_getline(char **pointer, size_t *n, FILE *strm)
 {
     char *buffer = malloc(sizeof(char) * (*n));
