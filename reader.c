@@ -16,7 +16,7 @@ char **input_text(char *prompt, size_t extent)
 	char *placeholder, **arrstore;
 	int i = 0;
 
-	if (getline(&prompt, &extent, stdin) == -1)
+	if (cust_getline(&prompt, &extent, stdin) == -1)
 	{
 		/*check if it's end of file and there is no more input*/
 		if (feof(stdin))

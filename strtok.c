@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * cust_strtk - custom version of strtok
+ * @string: string to be tokenized.
+ * @dlm: delimiter.
+ * Return: tokenized string.
+*/
 char *cust_strtk(char *string, const char *dlm)
 {
     static char *pointer = NULL;
