@@ -7,7 +7,7 @@
  * @strm: stream to read from.
  * Return: number of bytes read., -1 on failure. 
 */
-ssize_t *cust_getline(char **pointer, size_t *n, FILE *strm)
+ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 {
     char *buffer = malloc(sizeof(char) * (*n));
     size_t buff_size = *n, buff_offset = 0, data_size, rem_buff_size = *n;
