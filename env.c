@@ -49,7 +49,10 @@ char *_getenviron(const char *current)
 				if (value)
 				{
 					temp_size = sizeof(temp_buffer);
-					snfprinter(temp_buffer, temp_size, "=%s\n", value);
+					if(environ[i+1])
+						snfprinter(temp_buffer, temp_size, "=%s\n", value);
+					else
+						snfprinter(temp_buffer, temp_size, "=%s", value);
 					temp = strdup(temp_buffer);
 					if (!temp)
 					{
