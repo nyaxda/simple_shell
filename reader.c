@@ -29,7 +29,7 @@ char **input_text(char *prompt, size_t extent)
 			return (NULL);
 		}
 	}
-	placeholder = strtok(prompt, " \t\n");
+	placeholder = cust_strtk(prompt, " \t\n");
 	arrstore = malloc(sizeof(char *) * 1024);
 	if (arrstore == NULL)
 	{
@@ -39,7 +39,7 @@ char **input_text(char *prompt, size_t extent)
 	while (placeholder)
 	{
 		arrstore[i] = placeholder;
-		placeholder = strtok(NULL, " \t\n");
+		placeholder = cust_strtk(NULL, " \t\n");
 		i++;
 	}
 	arrstore[i] = NULL;

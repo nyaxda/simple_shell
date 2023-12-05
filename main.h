@@ -18,5 +18,6 @@ void executor(const char **arrstore);
 char *_getenviron(const char *current);
 char *str_concat(char *s1, char *s2);
 char *_strchr(char *s, char c);
+char *cust_strtk(char *string, const char *dlm);
 
 #endif /*MAIN_H_*/
