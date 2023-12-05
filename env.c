@@ -8,7 +8,7 @@
 char *_getenviron(const char *current)
 {
     extern char **environ;
-    char *value, *environ_var, *name;
+    char *value, *environ_var, *name, *new_output, *old_output;
     char *output = NULL, *temp, buffer[1024], temp_buffer[1024], *ooutput;
     int i = 0;
     size_t size, temp_size;
@@ -29,8 +29,8 @@ char *_getenviron(const char *current)
             {
                 size = sizeof(buffer);
                 snfprinter(buffer, size, "%s", name);
-                output = strdup(buffer);
-                if (!output)
+                new_output = strdup(buffer);
+                if (!new_output)
                 {
                     perror("Error");
                     return (NULL);
@@ -55,10 +55,21 @@ char *_getenviron(const char *current)
                         return (NULL);
                     }
                 }
-                ooutput =str_concat(output, temp);
-                free(output);
-                output = ooutput;
+                ooutput =str_concat(new_output, temp);
+                free(new_output);
+                new_output = ooutput;
                 free(temp);
+                if (output != NULL)
+                {
+                    old_output = output;
+                    output = str_concat(old_output, new_output);
+                    free(old_output);
+                }
+                else
+                {
+                    output = strdup(new_output);
+                }
+                free(new_output);
             }
         }
         free(environ_var);
