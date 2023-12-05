@@ -33,6 +33,7 @@ char *_getenviron(const char *current)
 			name = environ_var;
 			value = NULL;
 		}
+
 		if (current == NULL || (name && strcmp(name,current) == 0))
 		{
 			if (name)
