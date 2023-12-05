@@ -1,6 +1,5 @@
 #ifndef MAIN_H_
 #define MAIN_H_
-#define INITIAL_BUFFER_SIZE 1024
 #define INCREMENT_BUFFER_FACTOR 2
 
 #include <stdio.h>
