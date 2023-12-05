@@ -10,7 +10,8 @@
 ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 {
     char *buffer = malloc(sizeof(char) * (*n));
-    size_t buff_size = *n, buff_offset = 0, data_size, rem_buff_size = *n;
+    size_t buff_size = *n, buff_offset = 0, data_size, rem_buff_size = *n,
+    old_size;
     if (buffer == NULL)
     {
         return (-1);
@@ -23,6 +24,7 @@ ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
     
         if (rem_buff_size <= 1)
         {
+            old_size = buff_size;
             buff_size *= INCREMENT_BUFFER_FACTOR;
             rem_buff_size = buff_size - buff_offset;
             buffer = cust_realoc(buffer, old_size, buff_size);
