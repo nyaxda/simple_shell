@@ -16,12 +16,12 @@ char *cust_strtk(char *string, const char *dlm)
             return (NULL);
         }
     }
-    for (; *pointer != '\0' && _strchr((const char *)dlm, *pointer) != NULL; pointer++)
+    for (; *pointer != '\0' && _strchr((char *)dlm, *pointer) != NULL; pointer++)
     {
 
     }
     tkn = pointer;
-    while (*pointer != '\0' && _strchr((const char *)dlm, *pointer) == NULL)
+    while (*pointer != '\0' && _strchr((char *)dlm, *pointer) == NULL)
     {
         pointer++;
     }
