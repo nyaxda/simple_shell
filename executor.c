@@ -66,7 +66,7 @@ void executor(const char **arrstore)
 				perror("Error");
 				free(arrstore);
 				arrstore = NULL;
-				exit(0);
+				exit(1);
 			}
     	}
     	else
@@ -93,5 +93,8 @@ void executor(const char **arrstore)
 		}
 	}
 	else
-		wait(&status);	/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
+		wait(&status);
+		if (WIFEXITED(status))
+			exitstus = WEXITSTATUS(status);
+		/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }
