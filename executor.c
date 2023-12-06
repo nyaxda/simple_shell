@@ -8,7 +8,7 @@
  */
 void executor(const char **arrstore)
 {
-	int status;
+	int status, exitstus;
 	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
@@ -16,7 +16,15 @@ void executor(const char **arrstore)
 	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
 	if (strcmp(arrstore[0], "exit") == 0)
-		exit(0);
+	{
+		if (arrstore[1] != NULL)
+		{
+			exitstus = atoi(arrstore[1]);
+			exit(exit_status)
+		}
+		else
+			exit(0);
+	}
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
@@ -81,7 +89,7 @@ void executor(const char **arrstore)
 			perror("Error");
 			/*free arrstore memory and exit the child process*/
 			free(arrstore);
-			exit(0);
+			exit(1);
 		}
 	}
 	else
