@@ -94,7 +94,7 @@ void executor(const char **arrstore)
 	}
 	else
 		wait(&status);
-		if (WIFEXITED(status))
+	if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
 		/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }

@@ -1,3 +1,5 @@
+#include "main.h"
+
 /**
  * cust_setenv - custome sentenv that implements sentenv into our cusom shell
  *
