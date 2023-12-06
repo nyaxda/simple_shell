@@ -20,7 +20,6 @@ int cust_setenv(const char *name, const char *value)
 		perror("Failed to set new Env Variable");
 		return (-1);
 	}
-	printf("%s=%s\n", name, getenv(name));/*for testing*/
     return (0);
 }
 
@@ -42,6 +41,5 @@ int cust_unsetenv(const char *name)
 		perror("Failed to set Unset Env Var");
 		return (-1);
 	}
-	printf("%s=%s\n", name, getenv(name));
 	return (0);
 }
