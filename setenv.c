@@ -12,7 +12,6 @@ int cust_setenv(const char *name, const char *value, int overwrite)
 {
 	char *envvalue;
 
-	i = strlen(name) + strlen(value) + 2;
 	if (name == NULL || name[0] == '\0')
 	{
 		perror("Name not found");
