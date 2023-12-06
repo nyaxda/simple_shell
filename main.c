@@ -46,7 +46,8 @@ int main(void)
 					exit (1);
 				}
 			}
-			executor((const char **)arrstore);
+			else
+				executor((const char **)arrstore);
 		}
 		free(arrstore);
 	}
