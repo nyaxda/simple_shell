@@ -74,7 +74,10 @@ void executor(const char **arrstore)
 		wait(&status);
 	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "$?") == 0)
 	{
-		printer("%d", WEXITSTATUS(status));
+		char exit_status[10];
+		snfprinter(exit_status, sizeof(exit_status), "%s", WEXITSTATUS(status));
+		snfprinter(exit_status, sizeof(exit_status), "\n");
+		printer(exit_status);
 		return;
 	}
 	/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
