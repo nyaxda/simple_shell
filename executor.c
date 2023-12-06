@@ -17,7 +17,7 @@ void executor(const char **arrstore)
 	if (strcmp(arrstore[0], "exit") == 0)
 		exit(0);
 	/* child process has failed to initiate*/
-	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "echo") == 0)
+	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "exit") == 0)
 	{
 		if (strcmp(arrstore[2], "$?") == 0)
 		{
