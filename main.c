@@ -26,7 +26,7 @@ int main(void)
 		/*checking if the command is not empty*/
 		if (arrstore[0] != NULL)
 		{
-			if (strcmp(arrstore[0], "sentenv") == 0)
+			if (strcmp(arrstore[0], "setenv") == 0)
 			{
 				if(arrstore[1] != NULL && arrstore[2] != NULL)
 					cust_setenv(arrstore[1],arrstore[2]);
