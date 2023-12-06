@@ -11,7 +11,6 @@
 int cust_setenv(const char *name, const char *value, int overwrite)
 {
 	char *envvalue;
-	size_t i;
 
 	i = strlen(name) + strlen(value) + 2;
 	if (name == NULL || name[0] == '\0')
@@ -39,6 +38,7 @@ int cust_setenv(const char *name, const char *value, int overwrite)
 		}
 		return (0);
 	}
+	return (0);
 }
 
 /**
