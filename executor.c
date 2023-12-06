@@ -74,7 +74,6 @@ void executor(const char **arrstore)
 		wait(&status);
 	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "$?") == 0)
 	{
-		char exit_status[10];
 		print_integer(WEXITSTATUS(status), numbuff);
 		printer(numbuff);
 		return;
