@@ -10,17 +10,9 @@
  */
 int cust_setenv(const char *name, const char *value)
 {
-	char *envvalue;
-
 	if (name == NULL || name[0] == '\0')
 	{
 		perror("Name not found");
-		exit(1);
-	}
-	envvalue = getenv(name);
-	if(envvalue == NULL)
-	{
-		perror("Environment variable non-existent");
 		exit(1);
 	}
 	if (setenv(name, value, 1) == -1)
