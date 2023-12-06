@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -23,5 +24,7 @@ char *cust_strtk(char *string, const char *dlm);
 ssize_t cust_getline(char **pointer, size_t *n, FILE *strm);
 void *cust_realoc(void *ptr, unsigned int old_size, unsigned int new_size);
 void print_integer(int h, char *s);
-
+int char_unsetenv(const char *name);
+int cust_setenv(const char *name, const char *value, int overwrite);
 #endif /*MAIN_H_*/
+ 

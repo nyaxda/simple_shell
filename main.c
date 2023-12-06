@@ -27,6 +27,22 @@ int main(void)
 		if (arrstore[0] != NULL)
 		{
 			executor((const char **)arrstore);
+			if (strcmp(arrstore[0], "sentenv") == 0)
+				if(arrstore[1] != NULL && arrstore[2] != NULL && arrstore[3] != NULL)
+					cust_setenv(arrstore[1],arrstore[2], atoi(arrstore[3]));
+				else
+				{
+					perror("Insufficient setenv arguments");
+					exit (1);
+				}
+			if (strcmp(arrstore[0], "unsetenv") == 0)
+			if (arrstore[1] != NULL)
+        		cust_unsetenv(arrstore[1]);
+			else
+			{
+				perror("Insufficient unsetenv arguments");
+				exit (1);
+			}
 		}
 		free(arrstore);
 	}
