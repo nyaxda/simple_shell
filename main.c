@@ -29,8 +29,8 @@ int main(void)
 			executor((const char **)arrstore);
 			if (strcmp(arrstore[0], "sentenv") == 0)
 			{
-				if(arrstore[1] != NULL && arrstore[2] != NULL && arrstore[3] != NULL)
-					cust_setenv(arrstore[1],arrstore[2], atoi(arrstore[3]));
+				if(arrstore[1] != NULL && arrstore[2] != NULL)
+					cust_setenv(arrstore[1],arrstore[2]);
 				else
 				{
 					perror("Insufficient setenv arguments");

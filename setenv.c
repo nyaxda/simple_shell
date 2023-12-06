@@ -8,7 +8,7 @@
  * @overwrite: Flag indicator. 1 to overwrite and 0 not to overwrite.
  * Return: 0 on success, -1 on failure.
  */
-int cust_setenv(const char *name, const char *value, int overwrite)
+int cust_setenv(const char *name, const char *value)
 {
 	char *envvalue;
 
@@ -17,25 +17,16 @@ int cust_setenv(const char *name, const char *value, int overwrite)
 		perror("Name not found");
 		exit(1);
 	}
-	if (overwrite != 0 && overwrite != 1)
+	envvalue = getenv(name);
+	if(envvalue == NULL)
 	{
-		perror("Invalid overwrite value");
-		exit(1);
+		perror("Environment variable non-existent");
+		return(-1);
 	}
-	if (overwrite == 1)
+	if (setenv(name, value, overwrite) == -1)
 	{
-		envvalue = getenv(name);
-		if(envvalue == NULL)
-		{
-			perror("Environment variable non-existent");
-			return(-1);
-		}
-		if (setenv(name, value, overwrite) == -1)
-		{
-			perror("Failed to set new Env Variable");
-			return (-1);
-		}
-		return (0);
+		perror("Failed to set new Env Variable");
+		return (-1);
 	}
 	return (0);
 }
