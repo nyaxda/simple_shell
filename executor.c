@@ -75,7 +75,7 @@ void executor(const char **arrstore)
 	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "$?") == 0)
 	{
 		char exit_status[10];
-		snfprinter(exit_status, sizeof(exit_status), "%s", WEXITSTATUS(status));
+		snfprinter(exit_status, sizeof(exit_status), "%s", (char *)WEXITSTATUS(status));
 		snfprinter(exit_status, sizeof(exit_status), "\n");
 		printer(exit_status);
 		return;
