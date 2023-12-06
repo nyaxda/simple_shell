@@ -11,7 +11,8 @@ void executor(const char **arrstore)
 	int status;
 	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
-	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100];
+	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
+	*exit_code[3] = {"echo", NULL, NULL};
 	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
 	if (strcmp(arrstore[0], "exit") == 0)
@@ -31,8 +32,8 @@ void executor(const char **arrstore)
         		if (strcmp(arrstore[j], "$?") == 0)
         		{
             		print_integer(WEXITSTATUS(status), numbuff);
-        			arrstore[j] = numbuff;
-					execve("/bin/echo", (char * const *)arrstore, NULL);
+					exit_code[1] = numbuff;
+					execve("/bin/echo", (char * const *)exit_code, NULL);
     				return;
         		}
     		}
