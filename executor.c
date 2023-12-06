@@ -22,9 +22,8 @@ void executor(const char **arrstore)
 		if (strcmp(arrstore[3], "$?") == 0)
 		{
 			print_integer(WEXITSTATUS(status), numbuff);
-			arrstore[j] = numbuff;
+			printer(numbuff);
 		}
-		printer(numbuff);
 	}
 	if (child_process_id == -1)
 	{
