@@ -9,7 +9,7 @@
 void executor(const char **arrstore)
 {
 	int status;
-	size_t i, buf_size;
+	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100];
 	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
@@ -72,11 +72,17 @@ void executor(const char **arrstore)
 	}
 	else
 		wait(&status);
+	for (j = 0; arrstore[j] != NULL; j++)
+	{
+		if (strcmp(arrstore[j], "$?") == 0)
+		{
+			print_integer(WEXITSTATUS(status), numbuff);
+			arrstore[j] = numbuff;
+		}
+	}
 	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "$?") == 0)
 	{
-		print_integer(WEXITSTATUS(status), numbuff);
 		printer(numbuff);
-		return;
 	}
 	/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }
