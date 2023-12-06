@@ -24,6 +24,19 @@ void executor(const char **arrstore)
 	}
 	else if (child_process_id == 0)
 	{
+		if (strcmp(arrstore[0], "echo") == 0)
+		{
+    		for (j = 1; arrstore[j] != NULL; j++)
+    		{
+        		if (strcmp(arrstore[j], "$?") == 0)
+        		{
+            		print_integer(WEXITSTATUS(status), numbuff);
+        			arrstore[j] = numbuff;
+					execve("/bin/echo", (char * const *)arrstore, NULL);
+    				return;
+        		}
+    		}
+		}
 		if (strcmp(arrstore[0], "env") == 0)
 		{
 			buf_size = sizeof(buffer);
@@ -72,17 +85,4 @@ void executor(const char **arrstore)
 	}
 	else
 		wait(&status);	/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
-	if (strcmp(arrstore[0], "echo") == 0)
-	{
-    	for (j = 1; arrstore[j] != NULL; j++)
-    	{
-        	if (strcmp(arrstore[j], "$?") == 0)
-        	{
-            	print_integer(WEXITSTATUS(status), numbuff);
-        		arrstore[j] = numbuff;
-				execve("/bin/echo", (char * const *)arrstore, NULL);
-    			return;
-        	}
-    	}
-	}
 }
