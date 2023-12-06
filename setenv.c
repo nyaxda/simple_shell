@@ -23,7 +23,7 @@ int cust_setenv(const char *name, const char *value)
 		perror("Environment variable non-existent");
 		return(-1);
 	}
-	if (setenv(name, value, overwrite) == -1)
+	if (setenv(name, value, 1) == -1)
 	{
 		perror("Failed to set new Env Variable");
 		return (-1);
