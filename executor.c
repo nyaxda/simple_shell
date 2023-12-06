@@ -80,8 +80,9 @@ void executor(const char **arrstore)
         	{
             	print_integer(WEXITSTATUS(status), numbuff);
         		arrstore[j] = numbuff;
-				printer(numbuff);
         	}
     	}
+		execve("/bin/echo", (char * const *)arrstore, NULL);
+    	return;
 	}
 }
