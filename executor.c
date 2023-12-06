@@ -20,7 +20,7 @@ void executor(const char **arrstore)
 		if (arrstore[1] != NULL)
 		{
 			exitstus = atoi(arrstore[1]);
-			exit(exit_status)
+			exit(exitstus);
 		}
 		else
 			exit(0);
