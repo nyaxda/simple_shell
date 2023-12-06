@@ -1,30 +1,49 @@
 #include "main.h"
 
 /**
- * display_prompt - function checks if the program is connected to a terminal
- * using isatty and if so writes the shell prompt "$"
- * Return: void
+ * prompt - call prompt from another function (prompt)
+ * Return: prompt
  */
 
-void display_prompt(void)
+void prompt(void)
 {
-	if (isatty(STDIN_FILENO))
+	for (;;)
 	{
-		write(STDOUT_FILENO, "$ ", 2);
-	}
-}
+		char *text = NULL, **environ;
+		pid_t child_pid;
+		int status, lenbuf;
+		size_t bufsize = 0;
 
-/**
- * handle_signal - a signal handler function
- * signo: parameter for SIGINT signal(Ctrl+C)
- * Return: the prompt
- */
-
-void handle_signal(int signo)
-{
-	if (signo == SIGINT)
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		display_prompt();
+		place("$ ");
+		lenbuf = getline(&text, &bufsize, stdin);
+		if (lenbuf == -1)
+			exit(98);
+		if (compareExit(text, "exit") == 0)
+			exit(0);
+		if (compareEnv(text, "env") == 0)
+		{
+			while (*environ != NULL)
+			{
+				if (!(_strcmpdir(*environ, "USER")) ||
+						!(_strcmpdir(*environ, "LANGUAGE")) ||
+						!(_strcmpdir(*environ, "SESSION")) ||
+						!(_strcmpdir(*environ, "COMPIZ_CONFIG_PROFILE")) ||
+						!(_strcmpdir(*environ, "SHLV")) ||
+						!(_strcmpdir(*environ, "HOME")) ||
+						!(_strcmpdir(*environ, "C_IS")) ||
+						!(_strcmpdir(*environ, "DESKTOP_SESSION")) ||
+						!(_strcmpdir(*environ, "LOGNAME")) ||
+						!(_strcmpdir(*environ, "TERM")) ||
+						!(_strcmpdir(*environ, "PATH")))
+				{
+					place(*environ), place("\n"); }
+				environ++; }}
+		child_pid = fork();
+		if (child_pid < 0)
+			perror("Error");
+		if (child_pid == 0)
+			identify_string(text);
+		else
+			wait(&status);
 	}
 }

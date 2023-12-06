@@ -1,13 +1,18 @@
 #include "main.h"
 
-int main(void)
-{
-	size_t buf_size = 0;
-	char *buf = NULL;
+/**
+ * main - func with infinite loop
+ * @ac: No use
+ * @av: No use
+ * Return: loop.
+ **/
 
-	while (1)
-	{
-		getline(&buf, &buf_size, stdin);
-	}
+int main(int ac, char **av)
+{
+	(void)av;
+	(void)ac;
+
+	signal(SIGINT, controlC);
+	prompt();
 	return (0);
 }
