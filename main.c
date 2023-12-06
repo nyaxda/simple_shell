@@ -26,7 +26,6 @@ int main(void)
 		/*checking if the command is not empty*/
 		if (arrstore[0] != NULL)
 		{
-			executor((const char **)arrstore);
 			if (strcmp(arrstore[0], "sentenv") == 0)
 			{
 				if(arrstore[1] != NULL && arrstore[2] != NULL)
@@ -47,6 +46,7 @@ int main(void)
 					exit (1);
 				}
 			}
+			executor((const char **)arrstore);
 		}
 		free(arrstore);
 	}
