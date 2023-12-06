@@ -72,10 +72,10 @@ void executor(const char **arrstore)
 	}
 	else
 		wait(&status);
-		if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "$?") == 0)
-		{
-			printer("%d", WEXITSTATUS(status));
-			return;
-		}
+	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "$?") == 0)
+	{
+		printer("%d", WEXITSTATUS(status));
+		return;
+	}
 	/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }
