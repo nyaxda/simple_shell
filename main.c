@@ -36,7 +36,7 @@ int main(void)
 					exit (1);
 				}
 			}
-			if (strcmp(arrstore[0], "unsetenv") == 0)
+			else if (strcmp(arrstore[0], "unsetenv") == 0)
 			{
 				if (arrstore[1] != NULL)
         			cust_unsetenv(arrstore[1]);
