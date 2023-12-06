@@ -47,3 +47,39 @@ const char *insert)
 	}
 	*s = '\0';
 }
+
+/**
+ * print_integer - print an integer to a buffer
+ * @h: integer to print
+ * @s: buffer to store the resulting string
+ * Return: void.
+ */
+void print_integer(int h, char *s)
+{
+    int i = 0, temp = h, size = 0;
+    int is_negative = h < 0 ? 1 : 0, extra_space = (h < 0) ? 1 : 0;
+
+    while (temp != 0)
+    {
+        temp /= 10;
+        size++;
+    }
+    if (is_negative)
+        h = -h;
+    else if (h == 0)
+    {
+        s[0] = '0';
+        s[1] = '\0';
+        return;
+    }
+    i = size + extra_space;
+    s[i] = '\0';
+    while (size > 0)
+    {
+        s[--i] = h % 10 + '0';
+        h /= 10;
+        size--;
+    }
+    if (is_negative)
+        s[--i] = '-';
+}

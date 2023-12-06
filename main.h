@@ -22,5 +22,6 @@ char *_strchr(char *s, char c);
 char *cust_strtk(char *string, const char *dlm);
 ssize_t cust_getline(char **pointer, size_t *n, FILE *strm);
 void *cust_realoc(void *ptr, unsigned int old_size, unsigned int new_size);
+void print_integer(int h, char *s);
 
 #endif /*MAIN_H_*/
