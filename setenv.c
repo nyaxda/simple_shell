@@ -42,12 +42,12 @@ int cust_setenv(const char *name, const char *value, int overwrite)
 }
 
 /**
- * char_unsetenv - Unsets an environment variable.
+ * cust_unsetenv - Unsets an environment variable.
  *
  * @name: The name of the environment variable to unset.
  * Return: 0 on success, -1 on failure.
  */
-int char_unsetenv(const char *name)
+int cust_unsetenv(const char *name)
 {
 	if (name == NULL || name[0] == '\0')
 	{
