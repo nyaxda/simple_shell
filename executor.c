@@ -17,6 +17,15 @@ void executor(const char **arrstore)
 	if (strcmp(arrstore[0], "exit") == 0)
 		exit(0);
 	/* child process has failed to initiate*/
+	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[0], "echo") == 0)
+	{
+		if (strcmp(arrstore[3], "$?") == 0)
+		{
+			print_integer(WEXITSTATUS(status), numbuff);
+			arrstore[j] = numbuff;
+		}
+		printer(numbuff);
+	}
 	if (child_process_id == -1)
 	{
 		perror("Error");
@@ -71,18 +80,5 @@ void executor(const char **arrstore)
 		}
 	}
 	else
-		wait(&status);
-	for (j = 0; arrstore[j] != NULL; j++)
-	{
-		if (strcmp(arrstore[j], "$?") == 0)
-		{
-			print_integer(WEXITSTATUS(status), numbuff);
-			arrstore[j] = numbuff;
-		}
-	}
-	if (strcmp(arrstore[0], "echo") == 0 && strcmp(arrstore[1], "$?") == 0)
-	{
-		printer(numbuff);
-	}
-	/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
+		wait(&status);	/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }
