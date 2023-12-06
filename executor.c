@@ -72,7 +72,7 @@ void executor(const char **arrstore)
 	}
 	else
 		wait(&status);
-		if (strcmp(arrstore[0], "echo" && arrstore[0], "$?") == 0)
+		if (strcmp(arrstore[0], "echo" && arrstore[1], "$?") == 0)
 		{
 			printer("%d", WEXITSTATUS(status));
 			return (0);
