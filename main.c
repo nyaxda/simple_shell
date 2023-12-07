@@ -46,6 +46,10 @@ int main(void)
 					exit (1);
 				}
 			}
+			else if (strcmp(arrstore[0], "cd") == 0)
+			{
+					cust_cd(arrstore[1]);
+			}
 			else
 				executor((const char **)arrstore);
 		}
