@@ -28,7 +28,7 @@ void print_integer(int h, char *s);
 int cust_unsetenv(const char *name);
 int cust_setenv(const char *name, const char *value);
 int cust_cd(char *path);
-char cutter(char *untrimmed);
+char *cutter(char *untrimmed);
 void *command_separator(char *command_line);
 char **parser(char *carray);
 #endif /*MAIN_H_*/

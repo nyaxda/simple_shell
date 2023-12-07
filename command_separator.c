@@ -13,7 +13,7 @@ char *cutter(char *untrimmed)
 	if (duplicate == NULL || *duplicate == '\0')
 		return (duplicate);
 	while (isspace(*duplicate))
-		str++;
+		duplicate++;
 	cut = duplicate + strlen(duplicate) - 1;
 	while(cut > str && isspace(*cut))
 		cut--;
@@ -33,7 +33,7 @@ char *cutter(char *untrimmed)
  */
 void *command_separator(char *command_line)
 {
-	char *buffer, **carray, cut, **ag;
+	char *buffer, **carray, **ag;
 	int i = 0;
 	size_t j, size;
 
@@ -52,7 +52,7 @@ void *command_separator(char *command_line)
 	{
 		carray[j] = cutter(carray[j]);
 		ag = parser(carray[j]);
-		executor(ag);
+		executor((const char **)ag);
 		free(ag);
 	}
 	free(carray);
@@ -69,7 +69,7 @@ char **parser(char *carray)
 	int i = 0;
 	char **cmargmnts = malloc (sizeof(char *) * 1024), *buffer;
 	if (cmargmnts == NULL)
-		return (NULL)
+		return (NULL);
 
 	buffer = cust_strtk(carray, " ");
 	while(buffer)
