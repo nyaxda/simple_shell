@@ -19,7 +19,7 @@ void prompter(void)
 		}
 		if (getcwd(buffer, 1000) != NULL)
 		{
-			snfprinter(prompt, sizeof(prompt), "($)%s", buffer);
+			snfprinter(prompt, sizeof(prompt), "($)%s# ", buffer);
 			printer(prompt);
 			free(buffer);
 		}
