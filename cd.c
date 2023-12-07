@@ -6,7 +6,10 @@
  */
 int cust_cd(char *path)
 {
-    if (path == NULL)
+    static char *switcher = NULL;
+    char *temp = getcwd(NULL, 0);
+
+    if (path == NULL || strcmp(path, "~") == 0)
     {
         path = getenv("HOME");
         if (path == NULL)
@@ -14,13 +17,25 @@ int cust_cd(char *path)
             perror("Unable to change path");
             return (-1);
         }
-        else
-            return(0);
     }
-    else if (chdir(path) != 0)
+    else if (strcmp(path, "-") == 0)
     {
+        if (switcher != NULL)
+            path = switcher;
+        else
+        {
+            free(temp);
+            perror("Error");
+            return (-1);
+        }
+    }
+    if (chdir(path) != 0)
+    {
+        free(temp);
         perror("Error");
         return (-1);
     }
+    free(switcher);
+    switcher = temp;
     return (0);
 }
