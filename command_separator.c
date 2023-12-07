@@ -5,18 +5,18 @@
  * @untrimmed: The input string to be trimmed.
  * Return: The trimmed string.
  */
-char cutter(char *untrimmed)
+char *cutter(char *untrimmed)
 {
 	char *duplicate, *cut;
 
 	duplicate = untrimmed;
 	if (duplicate == NULL || *duplicate == '\0')
 		return (duplicate);
-	while (isspace(*str))
+	while (isspace(*duplicate))
 		str++;
-	cut = duplicate + strlen(str) - 1;
-	while(cut > str && isspace(*end))
-		end--;
+	cut = duplicate + strlen(duplicate) - 1;
+	while(cut > str && isspace(*cut))
+		cut--;
 	*(cut + 1) = '\0';
 	return (duplicate);
 }
@@ -43,17 +43,18 @@ void *command_separator(char *command_line)
 	{
 		carray[i] = buffer;
 		buffer = cust_strtk(NULL, ";");
-		i++
+		i++;
 	}
-	carray[i] = '\0';
-	i = 0;
-	size = strlen(carray);
+	carray[i] = NULL;
+	size = i;
 
-	for (j = 0, j < size, j++)
+	for (j = 0; j < size; j++)
+	{
 		carray[j] = cutter(carray[j]);
 		ag = parser(carray[j]);
 		executor(ag);
 		free(ag);
+	}
 	free(carray);
 }
 
