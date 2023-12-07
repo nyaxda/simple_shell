@@ -15,7 +15,7 @@ char *cutter(char *untrimmed)
 	while (isspace(*duplicate))
 		duplicate++;
 	cut = duplicate + strlen(duplicate) - 1;
-	while(cut > str && isspace(*cut))
+	while(cut > duplicate && isspace(*cut))
 		cut--;
 	*(cut + 1) = '\0';
 	return (duplicate);
@@ -31,7 +31,7 @@ char *cutter(char *untrimmed)
  * @command_line: The command line to be processed.
  * Return: void;
  */
-void *command_separator(char *command_line)
+void command_separator(char *command_line)
 {
 	char *buffer, **carray, **ag;
 	int i = 0;
