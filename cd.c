@@ -7,12 +7,16 @@
 int cust_cd(char *path)
 {
     if (path == NULL)
+    {
         path = getenv("HOME");
         if (path == NULL)
+        {
             perror("Unable to change path");
             return (-1);
+        }
         else
             return(0);
+    }
     else if (chdir(path) != 0)
     {
         perror("Error");
