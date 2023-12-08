@@ -7,12 +7,11 @@
 int main(void)
 {
 	int i, size = 1024;
-	char **arrstore, **holder;
+	char **arrstore = NULL, **holder = NULL;
 	char *prompt;
 
 	while (1)
 	{
-		arrstore = malloc(sizeof(char) * 1024);
 		prompt = malloc(sizeof(char) * 1024);
 		prompter();
 		arrstore = input_text(prompt, size);
@@ -43,6 +42,7 @@ int main(void)
 		}
 		free(prompt);
 		free(holder);
+		holder = NULL;
 	}
 	return (0);
 }
