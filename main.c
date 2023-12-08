@@ -42,8 +42,11 @@ int main(void)
 			free(arrstore);
 		}
 		free(prompt);
-		free(holder);
-		holder = NULL;
+		if (holder != NULL)
+		{
+			free(holder);
+			holder = NULL;
+		}
 	}
 	return (0);
 }

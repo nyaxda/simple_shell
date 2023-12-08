@@ -93,7 +93,11 @@ void executor(const char **arrstore)
 		}
 	}
 	else
-		wait(&status);
+		if(wait(&status) == -1)
+		{
+			perror("wait");
+			exit(1);
+		}
 	if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
 }
