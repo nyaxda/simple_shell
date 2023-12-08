@@ -7,8 +7,9 @@
  * @arrstore: The array of strings representing the command and its arguments.
  * Return: void.
  */
-void execute_command(char **arrstore)
+void execute_command(char *cline)
 {
+    char **arrstore = parser(cline);
     if (strcmp(arrstore[0], "setenv") == 0)
     {
         if(arrstore[1] != NULL && arrstore[2] != NULL)
@@ -35,4 +36,5 @@ void execute_command(char **arrstore)
     }
     else
         executor((const char **)arrstore);
+    free(arrstore);
 }

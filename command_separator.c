@@ -35,7 +35,6 @@ char **command_separator(char *command_line)
 	char *buffer, **carray, **ag;
 	int i = 0;
 	size_t j, size;
-	pid_t child_process;
 
 	ag = malloc(sizeof(char *) * 1024);
 	buffer = cust_strtk(command_line, ";");
