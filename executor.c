@@ -12,7 +12,7 @@ void executor(const char **arrstore)
 	size_t i, j, k, buf_size;
 	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
-	**store[1024] = NULL,	*exit_code[3] = {"echo", NULL, NULL};
+	*store[1024] = NULL,	*exit_code[3] = {"echo", NULL, NULL};
 	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
 	if (strcmp(arrstore[0], "exit") == 0)
@@ -35,6 +35,7 @@ void executor(const char **arrstore)
 	{
 		for (k = 0; arrstore[k] != NULL; k++)
 			store[k] = (char *)arrstore[k + 1];
+		store[k] = NULL;
 		if (strcmp(arrstore[0], "echo") == 0)
 		{
     		for (j = 1; arrstore[j] != NULL; j++)
