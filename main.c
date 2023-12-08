@@ -21,6 +21,11 @@ int main(void)
 			free(prompt);
 			return (0);
 		}
+		if (prompt[0] != '\0')
+		{
+			command_separator(prompt);
+		}
+		free(prompt);
 		/*checking if the command is not empty*/
 		if (arrstore[0] != NULL)
 		{
