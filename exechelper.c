@@ -9,7 +9,9 @@
  */
 void execute_command(char *cline)
 {
+    int i = 0;
     char **arrstore = parser(cline);
+
     if (strcmp(arrstore[0], "setenv") == 0)
     {
         if(arrstore[1] != NULL && arrstore[2] != NULL)
@@ -36,5 +38,10 @@ void execute_command(char *cline)
     }
     else
         executor((const char **)arrstore);
+    while(arrstore[i] != NULL)
+    {
+        free(arrstore[i]);
+        i++;
+    }
     free(arrstore);
 }
