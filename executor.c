@@ -33,8 +33,8 @@ void executor(const char **arrstore)
 	}
 	else if (child_process_id == 0)
 	{
-		for (k = 0; arrstore[j] != NULL; k++)
-			store[j] = (char *)arrstore[j + 1];
+		for (k = 0; arrstore[k] != NULL; k++)
+			store[k] = (char *)arrstore[k + 1];
 		if (strcmp(arrstore[0], "echo") == 0)
 		{
     		for (j = 1; arrstore[j] != NULL; j++)
