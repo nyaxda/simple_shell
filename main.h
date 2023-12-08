@@ -29,7 +29,8 @@ int cust_unsetenv(const char *name);
 int cust_setenv(const char *name, const char *value);
 int cust_cd(char *path);
 char *cutter(char *untrimmed);
-void command_separator(char *command_line);
+char **command_separator(char *command_line);
 char **parser(char *carray);
+void execute_command(char **arrstore);
 #endif /*MAIN_H_*/
  

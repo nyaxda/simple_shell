@@ -6,8 +6,8 @@
 */
 int main(void)
 {
-	int size = 1024;
-	char **arrstore;
+	int i;
+	char **arrstore, **holder;
 	char *prompt;
 
 	while (1)
@@ -25,44 +25,24 @@ int main(void)
 		{
 			command_separator(prompt);
 		}
-		free(prompt);
 		/*checking if the command is not empty*/
 		if (arrstore[0] != NULL)
 		{
 			if(_strchr(prompt, ';'))
-				command_separator(prompt);
-			else
 			{
-				if (strcmp(arrstore[0], "setenv") == 0)
-				{
-					if(arrstore[1] != NULL && arrstore[2] != NULL)
-						cust_setenv(arrstore[1],arrstore[2]);
-					else
-					{
-						perror("Insufficient setenv arguments");
-						exit (1);
-					}
-				}
-				else if (strcmp(arrstore[0], "unsetenv") == 0)
-				{
-					if (arrstore[1] != NULL)
-        				cust_unsetenv(arrstore[1]);
-					else
-					{
-						perror("Insufficient unsetenv arguments");
-						exit (1);
-					}
-				}
-				else if (strcmp(arrstore[0], "cd") == 0)
-				{
-						cust_cd(arrstore[1]);
-				}
-				else
-					executor((const char **)arrstore);
+				holder = command_separator(prompt);
+				free(arrstore);
+				arrstore = holder;
+			}
+			while (arrstore[i] != NULL)
+			{
+				execute_command(arrstore[i]);
+				i++;
 			}
 			free(arrstore);
 		}
 		free(prompt);
+		free(holder);
 	}
 	return (0);
 }

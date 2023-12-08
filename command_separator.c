@@ -22,22 +22,22 @@ char *cutter(char *untrimmed)
 }
 
 /**
- * command_separator - Separates a command line and executes.
+ * command_separator - Separates a command line;
  *
  * Description: Separates command line into individual commands, ';'
- * being the delimiter. Each command is then processed by the
- * cutter, parser, and executor functions.
+ * being the delimiter.
  *
  * @command_line: The command line to be processed.
- * Return: void;
+ * Return: array of separated commands.
  */
-void command_separator(char *command_line)
+char **command_separator(char *command_line)
 {
 	char *buffer, **carray, **ag;
 	int i = 0, status;
 	size_t j, size;
 	pid_t child_process;
 
+	ag = malloc(sizeof(char *) * 1024);
 	buffer = cust_strtk(command_line, ";");
 	carray = malloc(sizeof(char *) * 1024);
 	while(buffer)
@@ -53,36 +53,10 @@ void command_separator(char *command_line)
 	{
 		carray[j] = cutter(carray[j]);
 		ag = parser(carray[j]);
-		if (strcmp(ag[0], "setenv") == 0)
-				{
-					if(ag[1] != NULL && ag[2] != NULL)
-						cust_setenv(ag[1],ag[2]);
-					else
-					{
-						perror("Insufficient setenv arguments");
-						exit (1);
-					}
-				}
-				else if (strcmp(ag[0], "unsetenv") == 0)
-				{
-					if (ag[1] != NULL)
-        				cust_unsetenv(ag[1]);
-					else
-					{
-						perror("Insufficient unsetenv arguments");
-						exit (1);
-					}
-				}
-				else if (strcmp(ag[0], "cd") == 0)
-					cust_cd(ag[1]);
-				else
-				{
-					child_process = executor((const char **)ag);
-					waitpid(child_process, &status, 0);
-				}
-		free(ag);
 	}
+	ag(j) = NULL;
 	free(carray);
+	return (ag);
 }
 
 /**
