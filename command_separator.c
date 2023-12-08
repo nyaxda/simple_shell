@@ -52,7 +52,30 @@ void command_separator(char *command_line)
 	{
 		carray[j] = cutter(carray[j]);
 		ag = parser(carray[j]);
-		executor((const char **)ag);
+		if (strcmp(ag[0], "setenv") == 0)
+				{
+					if(ag[1] != NULL && ag[2] != NULL)
+						cust_setenv(ag[1],ag[2]);
+					else
+					{
+						perror("Insufficient setenv arguments");
+						exit (1);
+					}
+				}
+				else if (strcmp(ag[0], "unsetenv") == 0)
+				{
+					if (ag[1] != NULL)
+        				cust_unsetenv(ag[1]);
+					else
+					{
+						perror("Insufficient unsetenv arguments");
+						exit (1);
+					}
+				}
+				else if (strcmp(ag[0], "cd") == 0)
+					cust_cd(ag[1]);
+				else
+					exSecutor((const char **)ag);
 		free(ag);
 	}
 	free(carray);

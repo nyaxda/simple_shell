@@ -24,7 +24,7 @@ int main(void)
 		/*checking if the command is not empty*/
 		if (arrstore[0] != NULL)
 		{
-			if(strchr(prompt, ';'))
+			if(_strchr(prompt, ';'))
 				command_separator(prompt);
 			else
 			{
