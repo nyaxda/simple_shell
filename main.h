@@ -31,6 +31,6 @@ int cust_cd(char *path);
 char *cutter(char *untrimmed);
 char **command_separator(char *command_line);
 char **parser(char *carray);
-void execute_command(char *cline)
+void execute_command(char *cline);
 #endif /*MAIN_H_*/
  
