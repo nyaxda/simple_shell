@@ -75,7 +75,7 @@ void command_separator(char *command_line)
 				else if (strcmp(ag[0], "cd") == 0)
 					cust_cd(ag[1]);
 				else
-					exSecutor((const char **)ag);
+					executor((const char **)ag);
 		free(ag);
 	}
 	free(carray);
