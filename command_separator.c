@@ -33,7 +33,7 @@ char *cutter(char *untrimmed)
 char **command_separator(char *command_line)
 {
 	char *buffer, **carray, **ag;
-	int i = 0, status;
+	int i = 0;
 	size_t j, size;
 	pid_t child_process;
 
@@ -54,7 +54,7 @@ char **command_separator(char *command_line)
 		carray[j] = cutter(carray[j]);
 		ag = parser(carray[j]);
 	}
-	ag(j) = NULL;
+	ag[j] = NULL;
 	free(carray);
 	return (ag);
 }

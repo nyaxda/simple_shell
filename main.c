@@ -6,7 +6,7 @@
 */
 int main(void)
 {
-	int i;
+	int i, size;
 	char **arrstore, **holder;
 	char *prompt;
 
