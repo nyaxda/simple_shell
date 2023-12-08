@@ -64,8 +64,6 @@ void executor(const char **arrstore)
         	if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
 			{
 				perror("Error");
-				free(arrstore);
-				arrstore = NULL;
 				exit(1);
 			}
     	}
@@ -87,8 +85,6 @@ void executor(const char **arrstore)
 		if (i == sizeof(directories)/sizeof(directories[0]))
 		{
 			perror("Error");
-			/*free arrstore memory and exit the child process*/
-			free(arrstore);
 			exit(1);
 		}
 	}

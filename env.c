@@ -19,6 +19,7 @@ char *_getenviron(const char *current)
 		if (!environ_var)
 		{
 			perror("Error");
+			free(output);
 			return (NULL);
 		}
 		eq = _strchr(environ_var, '=');
@@ -44,6 +45,8 @@ char *_getenviron(const char *current)
 				if (!new_output)
 				{
 					perror("Error");
+					free(environ_var);
+					free(output);
 					return (NULL);
 				}
 				if (value)
@@ -57,6 +60,9 @@ char *_getenviron(const char *current)
 					if (!temp)
 					{
 						perror("Error");
+						free(new_output);
+						free(environ_var);
+						free(output);
 						return (NULL);
 					}
 				}
@@ -66,6 +72,9 @@ char *_getenviron(const char *current)
 					if (!temp)
 					{
 						perror("Error");
+						free(new_output);
+						free(environ_var);
+						free(output);
 						return (NULL);
 					}
 				}
