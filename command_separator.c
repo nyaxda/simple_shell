@@ -34,8 +34,9 @@ char *cutter(char *untrimmed)
 void command_separator(char *command_line)
 {
 	char *buffer, **carray, **ag;
-	int i = 0;
+	int i = 0, status;
 	size_t j, size;
+	pid_t child_process;
 
 	buffer = cust_strtk(command_line, ";");
 	carray = malloc(sizeof(char *) * 1024);
@@ -75,7 +76,10 @@ void command_separator(char *command_line)
 				else if (strcmp(ag[0], "cd") == 0)
 					cust_cd(ag[1]);
 				else
-					executor((const char **)ag);
+				{
+					child_process = executor((const char **)ag);
+					waitpid(child_process, &status, 0);
+				}
 		free(ag);
 	}
 	free(carray);
