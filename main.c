@@ -33,6 +33,7 @@ int main(void)
 				free(arrstore);
 				arrstore = holder;
 			}
+			i = 0;
 			while (arrstore[i] != NULL)
 			{
 				execute_command(arrstore[i]);
