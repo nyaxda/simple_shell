@@ -82,6 +82,7 @@ void executor(const char **arrstore)
 				}
 			}
 		}
+		printer("Finished executing command\n");
 		if (i == sizeof(directories)/sizeof(directories[0]))
 		{
 			perror("Error");
