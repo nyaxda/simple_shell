@@ -35,8 +35,7 @@ int cust_cd(char *path)
         perror("Error");
         return (-1);
     }
-    if (switcher != NULL)
-        free(switcher);
+    free(switcher);
     switcher = temp;
     return (0);
 }
