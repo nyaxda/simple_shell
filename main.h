@@ -29,6 +29,6 @@ void print_integer(int h, char *s);
 int cust_unsetenv(const char *name);
 int cust_setenv(const char *name, const char *value);
 int cust_cd(char *path);
-void freed(char **array, int size);
+void freed(char **array);
 #endif /*MAIN_H_*/
  
