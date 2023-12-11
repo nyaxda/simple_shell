@@ -102,10 +102,10 @@ void executor(const char **arrstore)
 		else
 		if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
 		{
-			snfprinter(msg, "sh: %s: not found\n", arrstore[0]);
+			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
 			printer(msg);
 			freed((char **)arrstore);
-			free(promp_path);
+			free(prompt_path);
 			free(msg);
 			exit(1);
 		}
