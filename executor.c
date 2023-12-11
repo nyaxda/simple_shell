@@ -14,6 +14,7 @@ void executor(const char **arrstore)
 	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
 	*exit_code[3] = {"echo", NULL, NULL}, *directories[1024] = {NULL}, *token, *msg, *path;
 
+	msg = malloc(200 * sizeof(char));
 	path = strdup(getenv("PATH"));
 	token = cust_strtk(path, ":");
 	k = 0;
@@ -46,7 +47,7 @@ void executor(const char **arrstore)
 			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", prompt_path);
 			printer(msg);
 			freed((char **)arrstore);
-			free(prompt_path);
+			free(msg);
 			exit(1);
 		}
     }
@@ -65,7 +66,6 @@ void executor(const char **arrstore)
         	snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
        		printer(msg);
         	freed((char **)arrstore);
-        	free(prompt_path);
         	free(msg);
         	exit(1);
     	}
@@ -105,7 +105,6 @@ void executor(const char **arrstore)
 			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
 			printer(msg);
 			freed((char **)arrstore);
-			free(prompt_path);
 			free(msg);
 			exit(1);
 		}
