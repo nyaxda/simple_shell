@@ -6,9 +6,9 @@
  * @size: The size of the array.
  * return: void.
  */
-void freed(char **array, int size)
+void freed(char **array)
 {
-    for (int i = 0; i < size; ++i)
+    for (int i = 0; array[i] != NULL; i++)
         free(array[i]);
     free(array);
 }
