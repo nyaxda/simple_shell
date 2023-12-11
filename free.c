@@ -9,8 +9,24 @@
 void freed(char **array)
 {
     int i;
+    if (array != NULL)
+    {
+        for (i = 0; array[i] != NULL; i++)
+            free(array[i]);
+        free(array);
+    }
+    array = NULL;
+}
 
-    for (i = 0; array[i] != NULL; i++)
-        free(array[i]);
-    free(array);
+/**
+ * charfree - Frees the memory allocated for a character string.
+ * @str: The character string to be freed.
+ */
+void charfree(char *str)
+{
+    if (str != NULL)
+    {
+        free(str);
+        str = NULL;
+    }
 }

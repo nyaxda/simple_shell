@@ -21,11 +21,11 @@ void prompter(void)
 		{
 			snfprinter(prompt, sizeof(prompt), "($)%s# ", buffer);
 			printer(prompt);
-			free(buffer);
+			charfree(buffer);
 		}
 		else
 		{
-			free(buffer);
+			charfree(buffer);
 			printer("($) ");
 		}
 	}

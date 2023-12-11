@@ -70,23 +70,23 @@ char *_getenviron(const char *current)
 					}
 				}
 				ooutput =str_concat(new_output, temp);
-				free(new_output);
+				charfree(new_output);
 				new_output = ooutput;
-				free(temp);
+				charfree(temp);
 				if (output != NULL)
 				{
 					old_output = output;
 					output = str_concat(old_output, new_output);
-					free(old_output);
+					charfree(old_output);
 				}
 				else
 				{
 					output = strdup(new_output);
 				}
-				free(new_output);
+				charfree(new_output);
 			}
 		}
-		free(environ_var);
+		charfree(environ_var);
 		i++;
 	}
 	return (output);

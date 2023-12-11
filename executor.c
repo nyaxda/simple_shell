@@ -47,7 +47,7 @@ void executor(const char **arrstore)
 			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", prompt_path);
 			printer(msg);
 			freed((char **)arrstore);
-			free(msg);
+			charfree(msg);
 			exit(1);
 		}
     }
@@ -66,7 +66,6 @@ void executor(const char **arrstore)
         	snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
        		printer(msg);
         	freed((char **)arrstore);
-        	free(msg);
         	exit(1);
     	}
 	}
@@ -105,12 +104,12 @@ void executor(const char **arrstore)
 			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
 			printer(msg);
 			freed((char **)arrstore);
-			free(msg);
+			charfree(msg);
 			exit(1);
 		}
 
-		free(en_output);
-		free(output);
+		charfree(en_output);
+		charfree(output);
 		_exit(0);
 		/*child process occurs here*/
 	}
@@ -118,4 +117,9 @@ void executor(const char **arrstore)
 		wait(&status);
 	if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
+	if (msg != NULL)
+	{
+		charfree(msg);
+		msg = NULL;
+	}
 }

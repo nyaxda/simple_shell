@@ -53,8 +53,8 @@ int main(void)
 			else
 				executor((const char **)arrstore);
 		}
-		free(arrstore);
+		freed(arrstore);
 	}
-	free(prompt);
+	charfree(prompt);
 	return (0);
 }
