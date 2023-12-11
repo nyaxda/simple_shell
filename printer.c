@@ -27,11 +27,10 @@ void snfprinter(char *print, size_t size, const char *format, ...)
 {
     va_list args;
     va_start(args, format);
-	const char *insert;
-	size_t len;
-    const char *g = format;
+	const char *insert, *g;
     char *s = print;
 
+	g = format;
     while (*g != '\0' && (size_t)(s - print) < size)
     {
         if (*g == '%' && *(g + 1) == 's')
