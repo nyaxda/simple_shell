@@ -18,9 +18,11 @@ void executor(const char **arrstore)
 	token = cust_strtk(path, ":");
 	k = 0;
 	while (token != NULL)
+	{
 		directories[k] = token;
 		token = cust_strtk(NULL, ":");
 		k++;
+	}
 	directories[k] = NULL;
 
 	if (strcmp(arrstore[0], "exit") == 0)
