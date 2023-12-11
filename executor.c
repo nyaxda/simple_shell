@@ -9,22 +9,11 @@
 void executor(const char **arrstore)
 {
 	int status, exitstus;
-	size_t i, j, buf_size,k;
-	pid_t child_process_id;
+	size_t i, j, buf_size;
+	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
-	*exit_code[3] = {"echo", NULL, NULL}, *directories[1024] = {NULL}, *token, *msg, *path;
-
-	msg = malloc(200 * sizeof(char));
-	path = strdup(getenv("PATH"));
-	token = cust_strtk(path, ":");
-	k = 0;
-	while (token != NULL)
-	{
-		directories[k] = token;
-		token = cust_strtk(NULL, ":");
-		k++;
-	}
-	directories[k] = NULL;
+	*exit_code[3] = {"echo", NULL, NULL};
+	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
 	if (strcmp(arrstore[0], "exit") == 0)
 	{
@@ -36,59 +25,14 @@ void executor(const char **arrstore)
 		else
 			exit(0);
 	}
-	printf("step 2\n");
-	if (arrstore[0][0] == '/')
-    {
-        /* If the command starts with '/', assume it's an absolute path */
-        snfprinter(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
-		if (access(prompt_path, F_OK) == 0)
-			child_process_id = fork();
-		else
-		{
-			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", prompt_path);
-			printer(msg);
-			/*freed((char **)arrstore);*/
-			/*charfree(msg);*/
-			exit(1);
-		}
-		printf("step 3\n");
-    }
-	else
-	{
-		for(i = 0; directories[i] != NULL; i++)
-		{
-			printf("Start of else\n");
-			snfprinter(prompt_path, sizeof(prompt_path), "%s/%s", directories[i], arrstore[0]);
-			printf("%s\n", prompt_path);
-	        if (access(prompt_path, F_OK) == 0)
-			{
-        	    child_process_id = fork();
-				printf("child process\n");
-			}
-			else
-				continue;
-		}
-		if (directories[i] == NULL)
-    	{
-        	snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
-       		printer(msg);
-			printf("Step where directory list is exhausted and no exec file found\n");
-        	/*freed((char **)arrstore);*/
-        	exit(1);
-    	}
-	}
-	printf("step 4\n");
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
 		perror("Error");
-		printf("No child process step\n");
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
-	
 	else if (child_process_id == 0)
 	{
-		printf("Is a child\n");
 		if (strcmp(arrstore[0], "echo") == 0)
 		{
     		for (j = 1; arrstore[j] != NULL; j++)
@@ -98,7 +42,6 @@ void executor(const char **arrstore)
             		print_integer(WEXITSTATUS(status), numbuff);
 					exit_code[1] = numbuff;
 					execve("/bin/echo", (char * const *)exit_code, NULL);
-					printf("exit code handled\n");
     				return;
         		}
     		}
@@ -110,33 +53,47 @@ void executor(const char **arrstore)
 			snfprinter(buffer, buf_size, "%s\n", en_output);
 			output = strdup(buffer);
 			printer(output);
-			printf("env handled\n");
+			free(en_output);
+			free(output);
 		}
-		else
-		if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
+		/*child process occurs here*/
+		if (arrstore[0][0] == '/')
+    	{
+        	/* If the command starts with '/', assume it's an absolute path */
+        	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
+        	if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
+			{
+				perror("Error");
+				free(arrstore);
+				arrstore = NULL;
+				exit(1);
+			}
+    	}
+    	else
 		{
-			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
-			printer(msg);
-			printf("execve failed\n");
-			/*freed((char **)arrstore);*/
-			/*charfree(msg);*/
+			for(i = 0; i < sizeof(directories)/sizeof(directories[0]); i++)
+			{
+				/*looking for filename PATH*/
+				snfprinter(prompt_path, sizeof(prompt_path), "%s/",
+				directories[i]);
+				snfprinter(prompt_path + strlen(prompt_path),
+				sizeof(prompt_path)- strlen(prompt_path), "%s", arrstore[0]);
+				if (execve(prompt_path, (char * const *)arrstore, NULL) != -1)
+				{
+					break;
+				}
+			}
+		}
+		if (i == sizeof(directories)/sizeof(directories[0]))
+		{
+			perror("Error");
+			/*free arrstore memory and exit the child process*/
+			free(arrstore);
 			exit(1);
 		}
-
-		charfree(en_output);
-		charfree(output);
-		/*_exit(0);*/
-		/*child process occurs here*/
-		printf("step 6\n");
 	}
 	else
 		wait(&status);
 	if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
-	if (msg != NULL)
-	{
-		charfree(msg);
-		msg = NULL;
-	}
-	printf("step done\n");
 }
