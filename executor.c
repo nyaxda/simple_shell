@@ -11,9 +11,20 @@ void executor(const char **arrstore)
 	int status, exitstus;
 	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
-	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
+	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100], *dir;
 	*exit_code[3] = {"echo", NULL, NULL};
-	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
+	char **directories, token;
+
+	directories = malloc(sizeof(char*) * 1024);
+	dir = getenv("PATH");
+	*token = cust_strtk(path, ":");
+	while (token != NULL && i < 1024)
+	{
+    	directories[i] = token;
+    	token = strtok(NULL, ":");
+		i++;
+	}
+	directories[i] = NULL;
 
 	if (strcmp(arrstore[0], "exit") == 0)
 	{
@@ -25,10 +36,28 @@ void executor(const char **arrstore)
 		else
 			exit(0);
 	}
+	i = 0;
+	while(direcories != NULL)
+	{
+		if access(directories[i], X_OK == 0)
+			break;
+		else
+			continue;
+	}
+	if directories[i] == NULL;
+	{
+		perror("Error");
+		freed(arrstore);
+		freed(directories);
+		exit(1);
+	
+	}
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
 		perror("Error");
+		freed(arrstore);
+		freed(directories);
 		exit(1);
 	}
 	else if (child_process_id == 0)
