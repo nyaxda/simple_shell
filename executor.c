@@ -58,10 +58,7 @@ void executor(const char **arrstore)
 		for(i = 0; directories[i] != NULL; i++)
 		{
 			printf("Start of else\n");
-			snfprinter(prompt_path, sizeof(prompt_path), "%s/", directories[i]);
-			printf("%s\n", prompt_path);
-			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path)
-			- strlen(prompt_path), "%s", arrstore[0]);
+			snfprinter(prompt_path, sizeof(prompt_path), "%s/%s", directories[i], arrstore[0]);
 			printf("%s\n", prompt_path);
 	        if (access(prompt_path, F_OK) == 0)
 			{

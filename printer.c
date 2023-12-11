@@ -22,30 +22,32 @@ void printer(const char *msg)
  * @insert: The string to be inserted.
  */
 
-void snfprinter(char *print, size_t size, const char *format,
-const char *insert)
+void snfprinter(char *print, size_t size, const char *format, const char **inserts)
 {
-	const char *g = format;
-	char *s = print;
-	size_t len = strlen(insert);
+    const char *g = format;
+    char *s = print;
+    int insert_index = 0;
 
-	while (*g != '\0' && (size_t)(s - print) < size)
-	{
-		if (*g == '%' && *(g + 1) == 's')
-		{
-			if ((s - print) + len < size)
-			{
-				strcpy(s, insert);
-				s += len;
-			}
-			g += 2;
-		}
-		else
-		{
-			*s++ = *g++;
-		}
-	}
-	*s = '\0';
+    while (*g != '\0' && (size_t)(s - print) < size)
+    {
+        if (*g == '%' && *(g + 1) == 's')
+        {
+            const char *insert = inserts[insert_index++];
+            size_t len = strlen(insert);
+
+            if ((s - print) + len < size)
+            {
+                strcpy(s, insert);
+                s += len;
+            }
+            g += 2;
+        }
+        else
+        {
+            *s++ = *g++;
+        }
+    }
+    *s = '\0';
 }
 
 /**
