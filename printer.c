@@ -26,11 +26,11 @@ void printer(const char *msg)
 void snfprinter(char *print, size_t size, char *format, ...)
 {
     va_list args;
-    va_start(args, format);
 	char *insert, *g;
     char *s = print;
 	size_t len;
 
+	va_start(args, format);
 	g = format;
     while (*g != '\0' && (size_t)(s - print) < size)
     {
