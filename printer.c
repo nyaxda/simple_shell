@@ -29,7 +29,6 @@ void snfprinter(char *print, size_t size, const char *format, ...)
     va_start(args, format);
 	const char *insert;
 	size_t len;
-
     const char *g = format;
     char *s = print;
 
