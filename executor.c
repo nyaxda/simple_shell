@@ -43,7 +43,7 @@ void executor(const char **arrstore)
 			child_process_id = fork();
 		else
 		{
-			snfprinter(msg, "sh: %s: not found\n", prompt_path);
+			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", prompt_path);
 			printer(msg);
 			freed(arrstore,sizeof(arrstore) / sizeof(arrstore[0]));
 			free(promp_path);
