@@ -1,3 +1,5 @@
+#include "main.h"
+
 /**
  * freed - Frees the memory allocated for a dynamically allocated 2D array.
  * @array: The 2D array to be freed.
