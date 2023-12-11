@@ -12,7 +12,7 @@ void executor(const char **arrstore)
 	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output,
-	numbuff[100], *dir, **directories, *token, *path;
+	numbuff[100], *dir, **directories, *token, *path, *exit_code;
 
 	directories = malloc(sizeof(char*) * 1024);
 	dir = getenv("PATH");
@@ -43,7 +43,7 @@ void executor(const char **arrstore)
 		else
 			continue;
 	}
-	if (directories[i] == NULL);
+	if (directories[i] == NULL)
 	{
 		perror("Error");
 		freed(directories);
