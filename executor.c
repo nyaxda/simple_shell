@@ -111,7 +111,6 @@ void executor(const char **arrstore)
 
 		free(en_output);
 		free(output);
-		free(directories);
 		_exit(0);
 		/*child process occurs here*/
 	}
