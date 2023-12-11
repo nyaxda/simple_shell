@@ -23,12 +23,13 @@ void printer(const char *msg)
  */
 #include <string.h>
 
-void snfprinter(char *print, size_t size, const char *format, ...)
+void snfprinter(char *print, size_t size, char *format, ...)
 {
     va_list args;
     va_start(args, format);
-	const char *insert, *g;
+	char *insert, *g;
     char *s = print;
+	size_t len;
 
 	g = format;
     while (*g != '\0' && (size_t)(s - print) < size)
