@@ -27,6 +27,5 @@ void charfree(char *str)
     if (str != NULL)
     {
         free(str);
-        str = NULL;
     }
 }

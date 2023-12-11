@@ -24,6 +24,7 @@ void executor(const char **arrstore)
 		token = cust_strtk(NULL, ":");
 		k++;
 	}
+	printf("step 1\n");
 	directories[k] = NULL;
 
 	if (strcmp(arrstore[0], "exit") == 0)
@@ -36,6 +37,7 @@ void executor(const char **arrstore)
 		else
 			exit(0);
 	}
+	printf("step 2\n");
 	if (arrstore[0][0] == '/')
     {
         /* If the command starts with '/', assume it's an absolute path */
@@ -51,6 +53,7 @@ void executor(const char **arrstore)
 			exit(1);
 		}
     }
+	printf("step 3\n");
 	else
 	{
 		for(i = 0; directories[i] != NULL; i++)
@@ -69,12 +72,14 @@ void executor(const char **arrstore)
         	exit(1);
     	}
 	}
+	printf("step 4\n");
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
 		perror("Error");
 		exit(EXIT_FAILURE);
 	}
+	printf("step 5\n");
 	else if (child_process_id == 0)
 	{
 		if (strcmp(arrstore[0], "echo") == 0)
@@ -113,6 +118,7 @@ void executor(const char **arrstore)
 		/*_exit(0);*/
 		/*child process occurs here*/
 	}
+	printf("step 6\n");
 	else
 		wait(&status);
 	if (WIFEXITED(status))
@@ -122,4 +128,5 @@ void executor(const char **arrstore)
 		charfree(msg);
 		msg = NULL;
 	}
+	printf("step done\n");
 }
