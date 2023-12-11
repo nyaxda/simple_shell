@@ -42,7 +42,7 @@ void *cust_realoc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	if (new_size == 0 && ptr != NULL)
 	{
-		charfree(ptr);
+		free(ptr);
 		return (NULL);
 	}
 
@@ -51,7 +51,7 @@ void *cust_realoc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	if (m == NULL)
 	{
-		charfree(ptr);
+		free(ptr);
 		return (NULL);
 	}
 
@@ -61,6 +61,6 @@ void *cust_realoc(void *ptr, unsigned int old_size, unsigned int new_size)
 	{
 		f[i] = *copy++;
 	}
-	charfree(ptr);
+	free(ptr);
 	return (m);
 }

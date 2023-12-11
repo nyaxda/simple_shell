@@ -54,6 +54,5 @@ ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 	*n = buff_size;
 	result = (ssize_t)buff_offset;
 	buff_offset = 0;
-	charfree(buffer);
 	return (result);
 }

@@ -24,18 +24,18 @@ int cust_cd(char *path)
             path = switcher;
         else
         {
-            charfree(temp);
+            free(temp);
             perror("Error");
             return (-1);
         }
     }
     if (chdir(path) != 0)
     {
-        charfree(temp);
+        free(temp);
         perror("Error");
         return (-1);
     }
-    charfree(switcher);
+    free(switcher);
     switcher = temp;
     return (0);
 }
