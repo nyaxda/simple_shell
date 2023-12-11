@@ -64,8 +64,10 @@ void executor(const char **arrstore)
 			- strlen(prompt_path), "%s", arrstore[0]);
 			printf("%s\n", prompt_path);
 	        if (access(prompt_path, F_OK) == 0)
+			{
         	    child_process_id = fork();
 				printf("child process\n");
+			}
 			else
 				continue;
 		}
