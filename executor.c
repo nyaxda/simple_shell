@@ -9,11 +9,19 @@
 void executor(const char **arrstore)
 {
 	int status, exitstus;
-	size_t i, j, buf_size;
-	pid_t child_process_id = fork();
+	size_t i, j, buf_size,k;
+	pid_t child_process_id;
 	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
-	*exit_code[3] = {"echo", NULL, NULL};
-	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
+	*exit_code[3] = {"echo", NULL, NULL}, *directories[1024] = {NULL}, *token, *msg, *path;
+
+	path = strdup(getenv("PATH"));
+	token = cust_strtk(path, ":");
+	k = 0;
+	while (token != NULL)
+		directories[k] = token;
+		token = cust_strtk(NULL, ":");
+		k++;
+	directories[k] = NULL;
 
 	if (strcmp(arrstore[0], "exit") == 0)
 	{
@@ -25,11 +33,46 @@ void executor(const char **arrstore)
 		else
 			exit(0);
 	}
+	if (arrstore[0][0] == '/')
+    {
+        /* If the command starts with '/', assume it's an absolute path */
+        snfprinter(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
+		if (access(prompt_path, F_OK) == 0)
+			child_process_id = fork();
+		else
+		{
+			snfprinter(msg, "sh: %s: not found\n", prompt_path);
+			printer(msg);
+			freed(arrstore,sizeof(arrstore) / sizeof(arrstore[0]));
+			free(promp_path);
+			exit(1);
+		}
+    }
+	else
+	{
+		for(i = 0; directories[i] != NULL; i++)
+		{
+			snfprinter(prompt_path, sizeof(prompt_path), "%s/", directories[i]);
+			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path)
+			- strlen(prompt_path), "%s", arrstore[0]);
+	        if (access(prompt_path, F_OK) == 0)
+        	    child_process_id = fork();
+		}
+		if (directories[i] == NULL)
+    	{
+        	snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
+       		printer(msg);
+        	freed(arrstore,sizeof(arrstore) / sizeof(arrstore[0]));
+        	free(prompt_path);
+        	free(msg);
+        	exit(1);
+    	}
+	}
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
 		perror("Error");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	else if (child_process_id == 0)
 	{
@@ -53,48 +96,26 @@ void executor(const char **arrstore)
 			snfprinter(buffer, buf_size, "%s\n", en_output);
 			output = strdup(buffer);
 			printer(output);
-			free(en_output);
-			free(output);
 		}
-		/*child process occurs here*/
-		if (arrstore[0][0] == '/')
-    	{
-        	/* If the command starts with '/', assume it's an absolute path */
-        	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
-        	if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
-			{
-				perror("Error");
-				free(arrstore);
-				arrstore = NULL;
-				exit(1);
-			}
-    	}
-    	else
+		else
+		if (execve((char * const *)prompt_path, (char * const *)arrstore, NULL) == -1)
 		{
-			for(i = 0; i < sizeof(directories)/sizeof(directories[0]); i++)
-			{
-				/*looking for filename PATH*/
-				snfprinter(prompt_path, sizeof(prompt_path), "%s/",
-				directories[i]);
-				snfprinter(prompt_path + strlen(prompt_path),
-				sizeof(prompt_path)- strlen(prompt_path), "%s", arrstore[0]);
-				if (execve(prompt_path, (char * const *)arrstore, NULL) != -1)
-				{
-					break;
-				}
-			}
-		}
-		if (i == sizeof(directories)/sizeof(directories[0]))
-		{
-			perror("Error");
-			/*free arrstore memory and exit the child process*/
-			free(arrstore);
+			snfprinter(msg, "sh: %s: not found\n", arrstore[0]);
+			printer(msg);
+			freed(arrstore,sizeof(arrstore) / sizeof(arrstore[0]));
+			free(promp_path);
+			free(msg);
 			exit(1);
 		}
+
+		free(en_output);
+		free(output);
+		free(directories);
+		_exit(0);
+		/*child process occurs here*/
 	}
 	else
 		wait(&status);
 	if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
-		/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }

@@ -10,6 +10,8 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+
 
 void prompter(void);
 void printer(const char *msg);
@@ -27,5 +29,6 @@ void print_integer(int h, char *s);
 int cust_unsetenv(const char *name);
 int cust_setenv(const char *name, const char *value);
 int cust_cd(char *path);
+void freed(char **array, int size);
 #endif /*MAIN_H_*/
  
