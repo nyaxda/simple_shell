@@ -52,8 +52,8 @@ void executor(const char **arrstore)
 			/*charfree(msg);*/
 			exit(1);
 		}
+		printf("step 3\n");
     }
-	printf("step 3\n");
 	else
 	{
 		for(i = 0; directories[i] != NULL; i++)
@@ -79,7 +79,7 @@ void executor(const char **arrstore)
 		perror("Error");
 		exit(EXIT_FAILURE);
 	}
-	printf("step 5\n");
+	
 	else if (child_process_id == 0)
 	{
 		if (strcmp(arrstore[0], "echo") == 0)
@@ -117,8 +117,8 @@ void executor(const char **arrstore)
 		charfree(output);
 		/*_exit(0);*/
 		/*child process occurs here*/
+		printf("step 6\n");
 	}
-	printf("step 6\n");
 	else
 		wait(&status);
 	if (WIFEXITED(status))
