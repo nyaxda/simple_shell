@@ -21,23 +21,26 @@ void printer(const char *msg)
  * @format: The format string containing "%s" placeholders.
  * @insert: The string to be inserted.
  */
+#include <string.h>
 
-void snfprinter(char *print, size_t size, const char *format, const char **inserts)
+void snfprinter(char *print, size_t size, const char *format, ...)
 {
+    va_list args;
+    va_start(args, format);
+
     const char *g = format;
     char *s = print;
-    int insert_index = 0;
 
     while (*g != '\0' && (size_t)(s - print) < size)
     {
         if (*g == '%' && *(g + 1) == 's')
         {
-            const char *insert = inserts[insert_index++];
+            const char *insert = va_arg(args, char*);
             size_t len = strlen(insert);
 
             if ((s - print) + len < size)
             {
-                strcpy(s, insert);
+                memcpy(s, insert, len);
                 s += len;
             }
             g += 2;
@@ -48,6 +51,8 @@ void snfprinter(char *print, size_t size, const char *format, const char **inser
         }
     }
     *s = '\0';
+
+    va_end(args);
 }
 
 /**
