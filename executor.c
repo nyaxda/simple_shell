@@ -24,7 +24,6 @@ void executor(const char **arrstore)
 		token = cust_strtk(NULL, ":");
 		k++;
 	}
-	printf("step 1\n");
 	directories[k] = NULL;
 
 	if (strcmp(arrstore[0], "exit") == 0)
@@ -58,16 +57,23 @@ void executor(const char **arrstore)
 	{
 		for(i = 0; directories[i] != NULL; i++)
 		{
+			printf("Start of else\n");
 			snfprinter(prompt_path, sizeof(prompt_path), "%s/", directories[i]);
+			printf("%s\n", prompt_path);
 			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path)
 			- strlen(prompt_path), "%s", arrstore[0]);
+			printf("%s\n", prompt_path);
 	        if (access(prompt_path, F_OK) == 0)
         	    child_process_id = fork();
+				printf("child process\n");
+			else
+				continue;
 		}
 		if (directories[i] == NULL)
     	{
         	snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
        		printer(msg);
+			printf("Step where directory list is exhausted and no exec file found\n");
         	/*freed((char **)arrstore);*/
         	exit(1);
     	}
@@ -77,11 +83,13 @@ void executor(const char **arrstore)
 	if (child_process_id == -1)
 	{
 		perror("Error");
+		printf("No child process step\n");
 		exit(EXIT_FAILURE);
 	}
 	
 	else if (child_process_id == 0)
 	{
+		printf("Is a child\n");
 		if (strcmp(arrstore[0], "echo") == 0)
 		{
     		for (j = 1; arrstore[j] != NULL; j++)
@@ -91,6 +99,7 @@ void executor(const char **arrstore)
             		print_integer(WEXITSTATUS(status), numbuff);
 					exit_code[1] = numbuff;
 					execve("/bin/echo", (char * const *)exit_code, NULL);
+					printf("exit code handled\n");
     				return;
         		}
     		}
@@ -102,12 +111,14 @@ void executor(const char **arrstore)
 			snfprinter(buffer, buf_size, "%s\n", en_output);
 			output = strdup(buffer);
 			printer(output);
+			printf("env handled\n");
 		}
 		else
 		if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
 		{
 			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
 			printer(msg);
+			printf("execve failed\n");
 			/*freed((char **)arrstore);*/
 			/*charfree(msg);*/
 			exit(1);
