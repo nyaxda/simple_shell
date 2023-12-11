@@ -45,7 +45,7 @@ void executor(const char **arrstore)
 		{
 			snfprinter(msg, sizeof(msg), "sh: %s: not found\n", prompt_path);
 			printer(msg);
-			freed(arrstore);
+			freed((char **)arrstore);
 			free(promp_path);
 			exit(1);
 		}
@@ -64,7 +64,7 @@ void executor(const char **arrstore)
     	{
         	snfprinter(msg, sizeof(msg), "sh: %s: not found\n", arrstore[0]);
        		printer(msg);
-        	freed(arrstore,sizeof(arrstore) / sizeof(arrstore[0]));
+        	freed((char **)arrstore);
         	free(prompt_path);
         	free(msg);
         	exit(1);
@@ -104,7 +104,7 @@ void executor(const char **arrstore)
 		{
 			snfprinter(msg, "sh: %s: not found\n", arrstore[0]);
 			printer(msg);
-			freed(arrstore,sizeof(arrstore) / sizeof(arrstore[0]));
+			freed((char **)arrstore);
 			free(promp_path);
 			free(msg);
 			exit(1);
