@@ -22,7 +22,7 @@ int executor(const char **arrstore)
 	}
 	directories[i] = NULL;
 	prompt_path = malloc(sizeof(char) * 1024);
-	for (i = 0; directories[i] !F NULL; i++)
+	for (i = 0; directories[i] != NULL; i++)
 	{
 		if (arrstore[0][0] == '/')
 		{
