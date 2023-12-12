@@ -8,7 +8,7 @@
  */
 void executor(const char **arrstore)
 {
-	int status, exitstus;
+	int status;
 	size_t i, j, buf_size;
 	pid_t child_process_id;
 	char prompt_path[1024], *en_output, buffer[1024], *output,
@@ -77,7 +77,7 @@ void executor(const char **arrstore)
 	}
 	else
 	{
-		child_process_id = fork()
+		child_process_id = fork();
 		/* child process has failed to initiate*/
 		if (child_process_id == -1)
 		{
