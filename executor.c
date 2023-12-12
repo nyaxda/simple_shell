@@ -11,7 +11,7 @@ void executor(const char **arrstore)
 	int status;
 	size_t i, j, buf_size;
 	pid_t child_process_id;
-	char prompt_path[1024], *en_output, buffer[1024], *output,
+	char *prompt_path[1024], *en_output, buffer[1024], *output,
 	numbuff[100], **directories, *token, *path, *exit_code[2];
 
 	directories = malloc(sizeof(char*) * 1024);
@@ -66,12 +66,12 @@ void executor(const char **arrstore)
 		if (arrstore[0][0] == '/')
 		{
     		snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
-			printf("%s\n", prompt_path);
+			/*printf("%s\n", prompt_path);*/
 		}
  		else
 		{
 			snprintf(prompt_path, sizeof(prompt_path), "%s/%s", directories[i], arrstore[0]);
-			printf("%s\n", prompt_path);
+			/*printf("%s\n", prompt_path);*/
 		}
 		if (access(prompt_path, F_OK) == 0)
 			break;
@@ -95,7 +95,7 @@ void executor(const char **arrstore)
 		}
 		else if (child_process_id == 0)
 		{
-			printf("%s before execution\n", prompt_path);
+			/*printf("%s before execution\n", prompt_path);*/
 			if (execve(prompt_path, (char * const *)arrstore, NULL) < 0)
 			{
 				perror("Error");
@@ -103,9 +103,7 @@ void executor(const char **arrstore)
 			}
 		}
 		else
-		{
 			wait(&status);
-		}
 	}
 	free(directories);
 }
