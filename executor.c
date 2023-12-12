@@ -36,7 +36,6 @@ void executor(const char **arrstore)
 		if (arrstore[1] != NULL)
 		{
 			exitstus = atoi(arrstore[1]);
-			freed(directories);
 			exit(exitstus);
 		}
 		else
@@ -91,7 +90,6 @@ void executor(const char **arrstore)
 	if (child_process_id == -1)
 	{
 		perror("Error");
-		freed(directories);
 		exit(1);
 	}
 	if (child_process_id == 0)
@@ -99,12 +97,10 @@ void executor(const char **arrstore)
 		if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
 		{
 			perror("Error");
-			freed(directories);
 			exit(1);
 		}
 		else
 		{
-			freed(directories);
 			exit(0);
 		}
 	}
