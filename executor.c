@@ -22,7 +22,7 @@ int executor(const char **arrstore)
 	}
 	directories[i] = NULL;
 	prompt_path = malloc(sizeof(char) * 1024);
-	for (i = 0; directories[i] != NULL; i++)
+	for (i = 0; directories[i] !F NULL; i++)
 	{
 		if (arrstore[0][0] == '/')
 		{
@@ -31,7 +31,7 @@ int executor(const char **arrstore)
 		}
 		else
 		{
-			snprintf(prompt_path, sizeof(prompt_path), "%s/%s",directories[i], arrstore[0]);
+			snprintf(prompt_path, 1024, "%s/%s",directories[i], arrstore[0]);
 			printf("%s\n", prompt_path);
 		}
 		if (access(prompt_path, F_OK) == 0)
