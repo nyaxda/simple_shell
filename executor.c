@@ -40,8 +40,10 @@ void executor(const char **arrstore)
 			exit(exitstus);
 		}
 		else
+		{
 			freed(directories);
 			exit(0);
+		}
 	}
 	if (strcmp(arrstore[0], "echo") == 0)
 	{
@@ -101,8 +103,10 @@ void executor(const char **arrstore)
 			exit(1);
 		}
 		else
+		{
 			freed(directories);
 			exit(0);
+		}
 	}
 	else
 	{
