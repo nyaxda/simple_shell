@@ -19,7 +19,7 @@ void executor(const char **arrstore)
 	{
 		directories[i] = strdup(token);
 		token = cust_strtk(NULL, ":");
-		printf("%s", directories[i]);
+		printf("%s\n", directories[i]);
 	}
 	directories[i] = NULL;
 	if (strcmp(arrstore[0], "exit") == 0)
@@ -56,16 +56,16 @@ void executor(const char **arrstore)
 		if (arrstore[0][0] == '/')
 		{
 			snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
-			printf("%s", prompt_path);
+			printf("%s\n", prompt_path);
 		}
 		else
 		{
 			snprintf(prompt_path, sizeof(prompt_path), "%s/%s",directories[i], arrstore[0]);
-			printf("%s", prompt_path);
+			printf("%s\n", prompt_path);
 		}
 		if (access(prompt_path, F_OK) == 0)
 		{
-			printf("%s this is the found path to executable file", prompt_path);
+			printf("%s this is the found path to executable file\n", prompt_path);
 			child_process_id = fork();
 			break;
 		}
