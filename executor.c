@@ -82,7 +82,7 @@ void executor(const char **arrstore)
 	else
 		wait(&status);
 	for (i = 0; directories[i] != NULL; i++)
-		free(directories[i];
+		free(directories[i]);
 	free(directories);
 	free(path);
 }
