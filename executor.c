@@ -2,7 +2,7 @@
 
 void executor(const char **arrstore)
 {
-	char **directories, *buffer, *env_output, *numbuff[100] = "", *path, prompt_path[1024],
+	char **directories, *buffer, *env_output, *numbuff, *path, prompt_path[1024],
 	*token;
 	int i, j, status;
 	pid_t child_process_id;
@@ -30,7 +30,9 @@ void executor(const char **arrstore)
     	{
         	if (strcmp(arrstore[j], "$?") == 0)
         	{
+				numbuff = malloc(sizeof(char *) * 100);
         		print_integer(WEXITSTATUS(status), numbuff);
+				free(numbuff);
 				break;
     		}
 		}
