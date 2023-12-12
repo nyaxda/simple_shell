@@ -1,3 +1,5 @@
+#include "main.h"
+
 void executor(const char **arrstore)
 {
 	char **directories, *buffer, *env_output, *numbuff, *path, prompt_path[1024],
