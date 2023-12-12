@@ -2,7 +2,7 @@
 
 void executor(const char **arrstore)
 {
-	char **directories, *buffer, *env_output, *numbuff, *path, prompt_path[1024],
+	char **directories, *buffer, *env_output, *numbuff[100] = "", *path, prompt_path[1024],
 	*token;
 	int i, j, status;
 	pid_t child_process_id;
