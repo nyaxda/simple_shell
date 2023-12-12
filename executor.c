@@ -81,14 +81,14 @@ void executor(const char **arrstore)
 	if (directories[i] == NULL)
 	{
 		perror("Error");
-		freed((char *)arrstore);
+		freed((char **)arrstore);
 		exit(1);
 	}
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
 		perror("Error");
-		freed((char *)directories);
+		freed(directories);
 		exit(1);
 	}
 	if (child_process_id == 0)
@@ -96,12 +96,12 @@ void executor(const char **arrstore)
 		if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
 		{
 			perror("Error");
-			freed((char *)directories);
+			freed(directories);
 			exit(1);
 		}
 		else
 		{
-			freed((char *)directories);
+			freed(directories);
 			exit(0);
 		}
 	}
@@ -111,5 +111,5 @@ void executor(const char **arrstore)
 		if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
 	}
-	freed((char *)directories);
+	freed(directories);
 }
