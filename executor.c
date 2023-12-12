@@ -40,7 +40,6 @@ void executor(const char **arrstore)
 		}
 		else
 		{
-			freed(directories);
 			exit(0);
 		}
 	}
@@ -110,5 +109,4 @@ void executor(const char **arrstore)
 		if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
 	}
-	freed(directories);
 }
