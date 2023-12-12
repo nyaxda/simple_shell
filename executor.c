@@ -12,7 +12,7 @@ void executor(const char **arrstore)
 	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output,
-	*numbuff[100], *dir, **directories, *token, *path, *exit_code;
+	*numbuff[100], **directories, *token, *path, *exit_code[2];
 
 	directories = malloc(sizeof(char*) * 1024);
 	if (directories == NULL)
@@ -46,7 +46,7 @@ void executor(const char **arrstore)
     	{
         	if (strcmp(arrstore[j], "$?") == 0)
         	{
-        		print_integer(WEXITSTATUS(status), (char *)numbuff);
+        		print_integer(WEXITSTATUS(status), numbuff);
 				exit_code[1] = numbuff;
 				execve("/bin/echo", (char * const *)exit_code, NULL);
     			return;
