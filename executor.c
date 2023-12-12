@@ -10,7 +10,7 @@ void executor(const char **arrstore)
 {
 	int status, exitstus;
 	size_t i, j, buf_size;
-	pid_t child_process_id = fork();
+	pid_t child_process_id;
 	char prompt_path[1024], *en_output, buffer[1024], *output,
 	numbuff[100], **directories, *token, *path, *exit_code[2];
 
@@ -32,17 +32,7 @@ void executor(const char **arrstore)
 	directories[i] = NULL;
 
 	if (strcmp(arrstore[0], "exit") == 0)
-	{
-		if (arrstore[1] != NULL)
-		{
-			exitstus = atoi(arrstore[1]);
-			exit(exitstus);
-		}
-		else
-		{
-			exit(0);
-		}
-	}
+		exit(0);
 	else if (strcmp(arrstore[0], "echo") == 0)
 	{
     	for (j = 1; arrstore[j] != NULL; j++)
@@ -80,34 +70,34 @@ void executor(const char **arrstore)
 			prompt_path[0] = '\0';
 		i++;
 	}
-	if (directories[i] == NULL)
+	if (directories[i] == NULL && prompt_path[0] == '\0')
 	{
 		perror("Error");
 		exit(1);
 	}
-	/* child process has failed to initiate*/
-	if (child_process_id == -1)
+	else
 	{
-		perror("Error");
-		exit(1);
-	}
-	else if (child_process_id == 0)
-	{
-		if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
+		child_process_id = fork()
+		/* child process has failed to initiate*/
+		if (child_process_id == -1)
 		{
 			perror("Error");
 			exit(1);
 		}
+		else if (child_process_id == 0)
+		{
+			if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
+			{
+				perror("Error");
+				exit(1);
+			}
+		}
 		else
 		{
-			exit(0);
+			wait(&status);
+			if (WIFEXITED(status))
+				exitstus = WEXITSTATUS(status);
 		}
-	}
-	else
-	{
-		wait(&status);
-		if (WIFEXITED(status))
-			exitstus = WEXITSTATUS(status);
 	}
 	free(directories);
 }
