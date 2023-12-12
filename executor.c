@@ -10,7 +10,7 @@ void executor(const char **arrstore)
 	directories = malloc(sizeof(char *) * 1024);
 	if (directories == NULL)
 	{
-		perror ("Error");
+		perror ("1");
 		return;
 	}
 	path = strdup(getenv("PATH"));
@@ -71,7 +71,7 @@ void executor(const char **arrstore)
 		}
 		else
 		{
-			perror("Error: Command not found");
+			perror("2");
 			exit(1);
 		}
 	}
