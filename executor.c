@@ -8,7 +8,7 @@
  */
 void executor(const char **arrstore)
 {
-	int status;
+	int status, exitstus;
 	size_t i, j, buf_size;
 	pid_t child_process_id;
 	char prompt_path[1024], *en_output, buffer[1024], *output,
