@@ -9,10 +9,6 @@ int main(void)
 	int size = 1024;
 	char *prompt = malloc(sizeof(char) * 1024), **arrstore;
 
-	if (arrstore == NULL || prompt == NULL)
-	{
-		return (0);
-	}
 	while (1)
 	{
 		prompter();
