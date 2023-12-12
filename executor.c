@@ -8,7 +8,7 @@
  */
 void executor(const char **arrstore)
 {
-	int status, exitstus;
+	int status, exitstus, flag;
 	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output,
@@ -65,14 +65,16 @@ void executor(const char **arrstore)
 	}
 	/*child process occurs here*/
 	i = 0;
-	if (arrstore[0][0] == '/')
-    	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
- 	else
-		snprintf(prompt_path, sizeof(prompt_path), "%s/%s", directories[i], arrstore[0]);
 	while (directories[i] != NULL)
 	{
+		if (arrstore[0][0] == '/')
+    		snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
+ 		else
+			snprintf(prompt_path, sizeof(prompt_path), "%s/%s", directories[i], arrstore[0]);
 		if (access(prompt_path, F_OK) == 0)
 			break;
+		else
+			prompt_path[0] = '\0';
 		i++;
 	}
 	if (directories[i] == NULL)
