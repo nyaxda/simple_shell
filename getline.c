@@ -32,7 +32,7 @@ ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 		}
 		rem_buff_size = buff_size - buff_offset;
 
-		if (buffer[buff_offset - 1] == '\n')
+		if (buff_offset > 0 && buffer[buff_offset - 1] == '\n')
 		{
 			if (rem_buff_size <= 1)
 			{
