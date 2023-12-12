@@ -11,7 +11,7 @@ void executor(const char **arrstore)
 	int status, exitstus;
 	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
-	char prompt_path[1024], *en_output, buffer[1024], *output,
+	char prompt_path[1024], *en_output, buffer[1024], *output;
 	numbuff[100], **directories, *token, *path, *exit_code[2];
 
 	directories = malloc(sizeof(char*) * 1024);
@@ -61,8 +61,8 @@ void executor(const char **arrstore)
 		snfprinter(buffer, buf_size, "%s\n", en_output);
 		output = strdup(buffer);
 		printer(output);
-		free(en_output);
-		free(output);
+		charfree(en_output);
+		charfree(output);
 	}
 	/*child process occurs here*/
 	i = 0;
@@ -81,7 +81,7 @@ void executor(const char **arrstore)
 	if (directories[i] == NULL)
 	{
 		perror("Error");
-		free(arrstore);
+		freed(arrstore);
 		exit(1);
 	}
 	/* child process has failed to initiate*/
