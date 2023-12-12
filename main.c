@@ -48,7 +48,10 @@ int main(void)
 			else
 				executor((const char **)arrstore);
 		}
-		freed(arrstore);
+		for (i = 0; arrstore[i] != NULL; i++)
+			free(arrstore[i]);
+		free(arrstore);
+		arrstore = NULL;
 	}
 	free(prompt);
 	return (0);
