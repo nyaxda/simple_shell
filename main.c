@@ -6,7 +6,7 @@
 */
 int main(void)
 {
-	int size = 1024, i;
+	int size = 1024, i, status = 0;
 	char *prompt = malloc(sizeof(char) * 1024), **arrstore;
 
 	while (1)
@@ -21,32 +21,8 @@ int main(void)
 		/*checking if the command is not empty*/
 		if (arrstore[0] != NULL)
 		{
-			if (strcmp(arrstore[0], "setenv") == 0)
-			{
-				if(arrstore[1] != NULL && arrstore[2] != NULL)
-					cust_setenv(arrstore[1],arrstore[2]);
-				else
-				{
-					perror("Insufficient setenv arguments");
-					exit (1);
-				}
-			}
-			else if (strcmp(arrstore[0], "unsetenv") == 0)
-			{
-				if (arrstore[1] != NULL)
-        			cust_unsetenv(arrstore[1]);
-				else
-				{
-					perror("Insufficient unsetenv arguments");
-					exit (1);
-				}
-			}
-			else if (strcmp(arrstore[0], "cd") == 0)
-			{
-					cust_cd(arrstore[1]);
-			}
-			else
-				executor((const char **)arrstore);
+			if (command_handler(arrstore, status) == 0)
+				status = executor((const char **)arrstore);
 		}
 		for (i = 0; arrstore[i] != NULL; i++)
 			free(arrstore[i]);

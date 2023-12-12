@@ -14,8 +14,6 @@
 void prompter(void);
 void printer(const char *msg);
 char **input_text(char *prompt, size_t extent);
-void snfprinter(char *print, size_t size, const char *format,
-const char *insert);
 void executor(const char **arrstore);
 char *_getenviron(const char *current);
 char *str_concat(char *s1, char *s2);
@@ -29,6 +27,7 @@ int cust_setenv(const char *name, const char *value);
 int cust_cd(char *path);
 void freed(char **array);
 void charfree(char *str);
+int command_handler(char **arrstore, int status);
 
 #endif /*MAIN_H_*/
  

@@ -1,9 +1,8 @@
 #include "main.h"
 
-void executor(const char **arrstore)
+int executor(const char **arrstore)
 {
-	char **directories, *buffer, *env_output, *numbuff, *path, prompt_path[1024],
-	*token;
+	char **directories, *buffer, *env_output, *numbuff, *path, *prompt_path, *token;
 	int i, j, status, found = 0;
 	pid_t child_process_id;
 
@@ -22,35 +21,7 @@ void executor(const char **arrstore)
 		printf("%s\n", directories[i]);
 	}
 	directories[i] = NULL;
-	if (strcmp(arrstore[0], "exit") == 0)
-		exit(0);
-	else if (strcmp(arrstore[0], "echo") == 0)
-	{
-		for (j = 1; arrstore[j] != NULL; j++)
-    	{
-        	if (strcmp(arrstore[j], "$?") == 0)
-        	{
-				numbuff = malloc(sizeof(char *) * 100);
-        		print_integer(WEXITSTATUS(status), numbuff);
-				free(numbuff);
-				break;
-    		}
-		}
-		printer(numbuff);
-	}
-	else if (strcmp(arrstore[0], "env") == 0)
-	{
-		env_output = _getenviron(NULL);
-		buffer = malloc(sizeof(char) * 1024);
-		if (buffer == NULL)
-		{
-			perror("Error: Mem allocation failed");
-			exit(1);
-		}
-		snprintf(buffer, 1024, "%s\n", env_output);
-		printer(buffer);
-		free(buffer);
-	}
+	
 	for (i = 0; directories[i] != NULL; i++)
 	{
 		if (arrstore[0][0] == '/')
@@ -70,7 +41,7 @@ void executor(const char **arrstore)
 			break;
 		}
 	}
-
+	
 	if (found != 0)
 	{
 		child_process_id = fork();
@@ -98,4 +69,5 @@ void executor(const char **arrstore)
 		free(directories[i]);
 	free(directories);
 	free(path);
+	return (status);
 }
