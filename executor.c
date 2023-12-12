@@ -11,7 +11,7 @@ void executor(const char **arrstore)
 	int status, exitstus;
 	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
-	char prompt_path[1024], *en_output, buffer[1024], *output
+	char prompt_path[1024], *en_output, buffer[1024], *output,
 	numbuff[100], **directories, *token, *path, *exit_code[2];
 
 	directories = malloc(sizeof(char*) * 1024);
