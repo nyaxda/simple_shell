@@ -13,7 +13,7 @@
  */
 char **input_text(char *prompt, size_t extent)
 {
-	char *placeholder, **arrstore, buffer;
+	char *placeholder, **arrstore, *buffer;
 	int i = 0;
 
 	buffer = malloc(sizeof(char) * extent);
