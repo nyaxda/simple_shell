@@ -25,7 +25,7 @@ void executor(const char **arrstore)
 	i = 0;
 	while (token != NULL)
 	{
-    	directories[i] = token;
+    	directories[i] = strdup(token);
     	token = cust_strtk(NULL, ":");
 		i++;
 	}
@@ -43,7 +43,7 @@ void executor(const char **arrstore)
 			exit(0);
 		}
 	}
-	if (strcmp(arrstore[0], "echo") == 0)
+	else if (strcmp(arrstore[0], "echo") == 0)
 	{
     	for (j = 1; arrstore[j] != NULL; j++)
     	{
@@ -56,7 +56,7 @@ void executor(const char **arrstore)
     		}
     	}
 	}
-	if (strcmp(arrstore[0], "env") == 0)
+	else if (strcmp(arrstore[0], "env") == 0)
 	{
 		buf_size = sizeof(buffer);
 		en_output = _getenviron(NULL);
@@ -91,7 +91,7 @@ void executor(const char **arrstore)
 		perror("Error");
 		exit(1);
 	}
-	if (child_process_id == 0)
+	else if (child_process_id == 0)
 	{
 		if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
 		{
@@ -109,6 +109,5 @@ void executor(const char **arrstore)
 		if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
 	}
-	free(path);
 	free(directories);
 }
