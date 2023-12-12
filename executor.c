@@ -61,6 +61,8 @@ void executor(const char **arrstore)
 	i = 0;
 	while (directories[i] != NULL)
 	{
+		prompt_path[0] = '\0';
+	
 		if (arrstore[0][0] == '/')
 		{
     		snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
