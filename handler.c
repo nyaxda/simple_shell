@@ -41,7 +41,7 @@ int command_handler(char **arrstore, int status)
             if (strcmp(arrstore[j], "$?") == 0)
             {
                 numbuff = malloc(sizeof(char *) * 100);
-                print_integer(WEXITSTATUS(status), numbuff);
+                sprintf(numbuff, "%d", WEXITSTATUS(status));
                 printer(numbuff);
                 free(numbuff);
                 break;
