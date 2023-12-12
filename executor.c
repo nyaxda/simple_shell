@@ -20,7 +20,7 @@ void executor(const char **arrstore)
 		perror("Error");
 		exit(1);
 	}
-	path = getenv("PATH");
+	path = strdup(getenv("PATH"));
 	token = cust_strtk(path, ":");
 	i = 0;
 	while (token != NULL)
@@ -109,4 +109,6 @@ void executor(const char **arrstore)
 		if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
 	}
+	free(path);
+	free(directories);
 }
