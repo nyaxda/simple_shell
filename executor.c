@@ -30,6 +30,7 @@ void executor(const char **arrstore)
 		i++;
 	}
 	directories[i] = NULL;
+	free(path);
 
 	if (strcmp(arrstore[0], "exit") == 0)
 		exit(0);
