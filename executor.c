@@ -4,7 +4,7 @@ void executor(const char **arrstore)
 {
 	char **directories, *buffer, *env_output, *numbuff, *path, prompt_path[1024],
 	*token;
-	int i, j, status;
+	int i, j, status, found = 0;
 	pid_t child_process_id;
 
 	directories = malloc(sizeof(char *) * 1024);
@@ -66,30 +66,34 @@ void executor(const char **arrstore)
 		if (access(prompt_path, F_OK) == 0)
 		{
 			printf("%s this is the found path to executable file\n", prompt_path);
-			child_process_id = fork();
+			found = 1;
 			break;
 		}
+	}
+
+	if (found != 0)
+	{
+		child_process_id = fork()
+		if	(child_process_id == -1)
+		{
+			perror("Fork Error");
+			exit(0);
+		}
+		else if (child_process_id == 0)
+		{
+			if(execve(prompt_path, (char * const *)arrstore, NULL) < 0)
+			{
+				perror("Error: Execution of command failed");
+				exit(EXIT_FAILURE);
+			}
+		}
 		else
-		{
-			perror("2");
-			exit(1);
-		}
-	}
-	if (child_process_id == -1)
-	{
-		perror("Fork Error");
-		exit(0);
-	}
-	else if (child_process_id == 0)
-	{
-		if(execve(prompt_path, (char * const *)arrstore, NULL) < 0)
-		{
-			perror("Error: Execution of command failed");
-			exit(EXIT_FAILURE);
-		}
+		wait(&status);
 	}
 	else
-		wait(&status);
+	{
+		perror("4");
+	}
 	for (i = 0; directories[i] != NULL; i++)
 		free(directories[i]);
 	free(directories);
