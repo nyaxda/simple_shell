@@ -6,7 +6,7 @@
 */
 int main(void)
 {
-	int size = 1024;
+	int size = 1024, i;
 	char *prompt = malloc(sizeof(char) * 1024), **arrstore;
 
 	while (1)
