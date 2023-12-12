@@ -26,7 +26,6 @@ void executor(const char **arrstore)
 	while (token != NULL)
 	{
     	directories[i] = strdup(token);
-		printf("%s\n", directories[i]);
     	token = cust_strtk(NULL, ":");
 		i++;
 	}
@@ -63,9 +62,15 @@ void executor(const char **arrstore)
 	while (directories[i] != NULL)
 	{
 		if (arrstore[0][0] == '/')
+		{
     		snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
+			printf("%s\n", prompt_path);
+		}
  		else
+		{
 			snprintf(prompt_path, sizeof(prompt_path), "%s/%s", directories[i], arrstore[0]);
+			printf("%s\n", prompt_path);
+		}
 		if (access(prompt_path, F_OK) == 0)
 			break;
 		else
@@ -88,6 +93,7 @@ void executor(const char **arrstore)
 		}
 		else if (child_process_id == 0)
 		{
+			printf("%s before execution\n", prompt_path);
 			if (execve(prompt_path, (char * const *)arrstore, NULL) < 0)
 			{
 				perror("Error");
