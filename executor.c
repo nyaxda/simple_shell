@@ -46,7 +46,7 @@ void executor(const char **arrstore)
     	{
         	if (strcmp(arrstore[j], "$?") == 0)
         	{
-        		print_integer(WEXITSTATUS(status), numbuff);
+        		print_integer(WEXITSTATUS(status), (char *)numbuff);
 				exit_code[1] = numbuff;
 				execve("/bin/echo", (char * const *)exit_code, NULL);
     			return;
@@ -66,7 +66,7 @@ void executor(const char **arrstore)
 	/*child process occurs here*/
 	i = 0;
 	if (arrstore[0][0] == '/')
-    	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0])
+    	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
  	else
 		snprintf(prompt_path, sizeof(prompt_path), "%s/%s", directories[i], arrstore[0]);
 	while (directories[i] != NULL)
