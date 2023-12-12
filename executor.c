@@ -26,7 +26,7 @@ void executor(const char **arrstore)
 	while (token != NULL)
 	{
     	directories[i] = strdup(token);
-		printf("%s", directories[i]);
+		printf("%s\n", directories[i]);
     	token = cust_strtk(NULL, ":");
 		i++;
 	}
