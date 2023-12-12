@@ -111,4 +111,5 @@ void executor(const char **arrstore)
 		if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
 	}
+	freed(directories);
 }
