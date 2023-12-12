@@ -22,6 +22,7 @@ void executor(const char **arrstore)
 	}
 	path = getenv("PATH");
 	token = cust_strtk(path, ":");
+	i = 0;
 	while (token != NULL)
 	{
     	directories[i] = token;
