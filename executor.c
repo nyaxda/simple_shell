@@ -26,6 +26,7 @@ void executor(const char **arrstore)
 	while (token != NULL)
 	{
     	directories[i] = strdup(token);
+		printf("%s", directories[i]);
     	token = cust_strtk(NULL, ":");
 		i++;
 	}
@@ -87,7 +88,7 @@ void executor(const char **arrstore)
 		}
 		else if (child_process_id == 0)
 		{
-			if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
+			if (execve(prompt_path, (char * const *)arrstore, NULL) < 0)
 			{
 				perror("Error");
 				exit(1);
