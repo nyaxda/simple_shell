@@ -36,9 +36,11 @@ void executor(const char **arrstore)
 		if (arrstore[1] != NULL)
 		{
 			exitstus = atoi(arrstore[1]);
+			freed(directories);
 			exit(exitstus);
 		}
 		else
+			freed(directories);
 			exit(0);
 	}
 	if (strcmp(arrstore[0], "echo") == 0)
@@ -81,7 +83,6 @@ void executor(const char **arrstore)
 	if (directories[i] == NULL)
 	{
 		perror("Error");
-		freed((char **)arrstore);
 		exit(1);
 	}
 	/* child process has failed to initiate*/
@@ -100,10 +101,8 @@ void executor(const char **arrstore)
 			exit(1);
 		}
 		else
-		{
 			freed(directories);
 			exit(0);
-		}
 	}
 	else
 	{
