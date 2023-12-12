@@ -73,7 +73,7 @@ void executor(const char **arrstore)
 
 	if (found != 0)
 	{
-		child_process_id = fork()
+		child_process_id = fork();
 		if	(child_process_id == -1)
 		{
 			perror("Fork Error");
