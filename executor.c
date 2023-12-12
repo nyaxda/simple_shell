@@ -3,7 +3,7 @@
 void executor(const char **arrstore)
 {
 	char **directories, *buffer, *env_output, *numbuff, *path, prompt_path[1024],
-	*token; *exit_code[2];
+	*token;
 	int i, j, status;
 	pid_t child_process_id;
 
@@ -13,7 +13,7 @@ void executor(const char **arrstore)
 		perror ("Error");
 		return;
 	}
-	path = strdup(getenv("PATH");
+	path = strdup(getenv("PATH"));
 	token = cust_strtk(path, ":");
 	for (i = 0; token != NULL; i++)
 	{
