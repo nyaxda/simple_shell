@@ -91,7 +91,7 @@ void executor(const char **arrstore)
 		if (child_process_id == -1)
 		{
 			perror("Error");
-			_exit(1);
+			return;
 		}
 		else if (child_process_id == 0)
 		{
@@ -99,7 +99,7 @@ void executor(const char **arrstore)
 			if (execve(prompt_path, (char * const *)arrstore, NULL) < 0)
 			{
 				perror("Error");
-				_exit(1);
+				return;
 			}
 		}
 		else
