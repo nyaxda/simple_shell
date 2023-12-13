@@ -97,14 +97,14 @@ void executor(const char **arrstore)
 				fprintf(stderr, "./hsh: %d: %s: not found\n", EXIT_FAILURE, strlteral);
 				free(arrstore);
 				free(strlteral);
-				exit(127);
+				exit(1);
     		}
 			else
 			{
 				fprintf(stderr, "./hsh: %d: %s: not found\n", EXIT_FAILURE, arrstore[0]);
 				/*free arrstore memory and exit the child process*/
 				free(arrstore);
-				exit(127);
+				exit(1);
 			}
 		}
 	}
@@ -112,5 +112,6 @@ void executor(const char **arrstore)
 		wait(&status);
 	if (WIFEXITED(status))
 			exitstus = WEXITSTATUS(status);
+			exit(exitstus);
 		/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }
