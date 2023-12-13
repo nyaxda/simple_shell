@@ -28,7 +28,14 @@ int main(void)
 		if (arrstore[0] != NULL)
 		{
 			if (command_handler(arrstore, status) == 0)
-				status = executor((const char **)arrstore);
+			{
+				prompt_path = parser(arrstore);
+				if (prompt_path != NULL)
+				{
+					status = executor((const char **)arrstore, prompt_path);
+					free(prompt_path);
+				}
+			}
 			else
 				status = 0;
 		}

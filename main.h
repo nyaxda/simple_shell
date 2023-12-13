@@ -14,7 +14,7 @@
 void prompter(void);
 void printer(const char *msg);
 char **input_text(char *prompt, size_t extent);
-int executor(const char **arrstore);
+int executor(const char **arrstore, char *prompt_path);
 char *_getenviron(const char *current);
 char *str_concat(char *s1, char *s2);
 char *_strchr(char *s, char c);
@@ -24,8 +24,7 @@ void *cust_realoc(void *ptr, unsigned int old_size, unsigned int new_size);
 int cust_unsetenv(const char *name);
 int cust_setenv(const char *name, const char *value);
 int cust_cd(char *path);
-void freed(char **array);
-void charfree(char *str);
+char *parser(char **arrstore);
 int command_handler(char **arrstore, int status);
 
 #endif /*MAIN_H_*/
