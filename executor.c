@@ -104,7 +104,8 @@ void handle_execve(const char **arrstore, const char
 		for (i = 0; i < dir_size; i++)
 		{
 			snfprinter(prompt_path, sizeof(prompt_path), "%s/", directories[i]);
-			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path) - strlen(prompt_path), "%s", arrstore[0]);
+			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path)
+			- strlen(prompt_path), "%s", arrstore[0]);
 			if (execve(prompt_path, (char * const *)arrstore, environ) != -1)
 			{
 				break;
