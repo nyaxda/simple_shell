@@ -14,8 +14,17 @@ void executor(const char **arrstore)
 	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
 	*exit_code[3] = {"echo", NULL, NULL};
-	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
+	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"}, *strlteral;
 
+	if (arrstore[0][0] == '"') 
+    {
+        strlteral = arrstore[0] + 1;
+        if (strlteral[strlen(strlteral) - 1] == '"') 
+        {
+            fprintf(stderr, "./hsh: %d: %s: not found\n", 1, literal);
+            return;
+        }
+    }
 	if (strcmp(arrstore[0], "exit") == 0)
 	{
 		if (arrstore[1] != NULL)
