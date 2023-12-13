@@ -46,7 +46,7 @@ void handle_error(char *message, char *prompt, char **arrstore)
 	perror(message);
 	free(prompt);
 	free(arrstore);
-	exit(1);
+	return;
 }
 
 /**
@@ -98,5 +98,5 @@ void handle_input_error(char *prompt, char **arrstore)
 	free(prompt);
 	if (arrstore != NULL)
 		free(arrstore);
-	exit(0);
+	return;
 }
