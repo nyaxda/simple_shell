@@ -6,7 +6,7 @@
  */
 int cust_cd(char *path)
 {
-	static char *switcher = NULL;
+	static char *switcher;
 	char *temp = getcwd(NULL, 0);
 
 	if (path == NULL || strcmp(path, "~") == 0)
