@@ -20,7 +20,7 @@ int cust_setenv(const char *name, const char *value)
 		perror("Failed to set new Env Variable");
 		return (-1);
 	}
-    return (0);
+	return (0);
 }
 
 /**
