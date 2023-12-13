@@ -7,8 +7,8 @@
 int main(void)
 {
 	int size = 1024;
-	char **arrstore = malloc(sizeof(char) * 1024);
-	char *prompt = malloc(sizeof(char) * 1024);
+	char **arrstore = malloc(sizeof(char) * size);
+	char *prompt = malloc(sizeof(char) * size), *new_arrstore;
 
 	if (arrstore == NULL || prompt == NULL)
 	{
@@ -17,12 +17,17 @@ int main(void)
 	while (1)
 	{
 		prompter();
-		arrstore = input_text(prompt, size);
-		if (arrstore == NULL)
+		new_arrstore = input_text(prompt, size);
+		if (new_arrstore == NULL)
 		{
 			free(prompt);
+			if (arrstore != NULL)
+				free(arrstore);
 			return (0);
 		}
+		if (arrstore != NULL)
+			free(arrstore);
+		arrstore = new_arrstore;
 		/*checking if the command is not empty*/
 		if (arrstore[0] != NULL)
 		{
@@ -33,6 +38,8 @@ int main(void)
 				else
 				{
 					perror("Insufficient setenv arguments");
+					free(prompt);
+					free(arrstore);
 					exit (1);
 				}
 			}
@@ -43,6 +50,8 @@ int main(void)
 				else
 				{
 					perror("Insufficient unsetenv arguments");
+					free(prompt);
+					free(arrstore);
 					exit (1);
 				}
 			}
@@ -54,6 +63,7 @@ int main(void)
 				executor((const char **)arrstore);
 		}
 		free(arrstore);
+		arrstore = NULL;
 	}
 	free(prompt);
 	return (0);
