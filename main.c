@@ -36,8 +36,8 @@ int main(void)
 					free(prompt_path);
 				}
 			}
-			else
 				status = 0;
+				free(arrstore)
 		}
 		for (i = 0; arrstore[i] != NULL; i++)
 			free(arrstore[i]);
