@@ -32,8 +32,5 @@ int cust_cd(char *path);
 char *concatenate_strings(char *output, char *new_output);
 char *process_value(char *value, char *new_output);
 char *process_env_var(char *environ_var, const char *current, char *output);
-void handle_exit(const char **arrstore);
-void handle_echo(const char **arrstore, int status);
-void handle_execve(const char **arrstore, const char *directories[], size_t dir_size);
 #endif /*MAIN_H_*/
  
