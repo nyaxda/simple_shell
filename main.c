@@ -46,13 +46,13 @@ void handle_error(char *message, char *prompt, char **arrstore)
 	perror(message);
 	free(prompt);
 	free(arrstore);
-	exit (1);
+	exit(1);
 }
 
 /**
  * main - This file contains the main function of the simple_shell program.
  *
- * @return 0 on successful execution.
+ * Return: 0 on successful execution.
  */
 int main(void)
 {
