@@ -13,9 +13,12 @@
  */
 char **input_text(char *prompt, size_t extent)
 {
-	char placeholder[MAX_SIZE], *arrstore[MAX_SIZE];
+	char placeholder[MAX_SIZE], **arrstore = malloc(MAX_SIZE * sizeof(char *));
 	int i = 0, j;
 
+	if(arrstore == NULL)
+		return (NULL);
+	
 	free(prompt);
 	prompt = NULL;
 	if (cust_getline(&prompt, &extent, stdin) == -1)
@@ -35,10 +38,11 @@ char **input_text(char *prompt, size_t extent)
 	while (placeholder[0] != '\0')
 	{
 		arrstore[i] = malloc(MAX_SIZE);
-		if (arrstore[i] = NULL)
+		if (arrstore[i] == NULL)
 		{
 			for(j = 0; j < i; j++)
 				free(arrstore[j]);
+			free(arrstore);
 			free(prompt);
 			return (NULL);
 		}
