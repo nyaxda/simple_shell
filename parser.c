@@ -5,7 +5,7 @@ char *parser(char **arrstore)
     char *path, *token = NULL, *prompt_path = NULL, *path_dup;
     int i, found = 0;
 
-    if(*arrstore == NULL || arrstore == NULL)
+    if (*arrstore == NULL || arrstore == NULL)
         return (NULL);
 	path = getenv("PATH");
 	if (path == NULL)
@@ -22,7 +22,7 @@ char *parser(char **arrstore)
 	token = strtok(path_dup, ":");
 	while (token != NULL)
 	{
-        prompt_path = realloc(sizeof(char) * 1024);
+        prompt_path = realloc(prompt_path, sizeof(char) * 1024);
         if (prompt_path == NULL)
         {
             perror("Memory reallocation error");
@@ -51,8 +51,9 @@ char *parser(char **arrstore)
 	}
     free(path_dup);
     if (!found)
+    {
         free(prompt_path);
         return (NULL);
-
+    }
     return (prompt_path);
 }
