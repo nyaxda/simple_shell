@@ -6,7 +6,9 @@ char *parser(char **arrstore)
     int found = 0;
 
     if (*arrstore == NULL || arrstore == NULL)
+    {
         return (NULL);
+    }
 	path = getenv("PATH");
 	if (path == NULL)
 	{
