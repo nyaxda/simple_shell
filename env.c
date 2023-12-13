@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * concatenate_string - Concatenates two strings and returns the result.
+ * concatenate_strings - Concatenates two strings and returns the result.
  *
  * @output: The string to be concatenated.
  * @new_output: The string to be concatenated with 'output'.
