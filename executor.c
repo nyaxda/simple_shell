@@ -60,7 +60,7 @@ void executor(const char **arrstore)
 			free(output);
 		}
 		/*child process occurs here*/
-		if (arrstore[0][0] == '/')
+		if (arrstore[0][0] == '/' && strcmp(arrstore[0], "env") != 0)
     	{
         	/* If the command starts with '/', assume it's an absolute path */
         	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
