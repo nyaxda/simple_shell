@@ -3,7 +3,7 @@
 char *parser(char **arrstore)
 {
     char *path, *token = NULL, *prompt_path = NULL, *path_dup;
-    int i, found = 0;
+    int found = 0;
 
     if (*arrstore == NULL || arrstore == NULL)
         return (NULL);
