@@ -23,7 +23,8 @@ void handle_exit(const char **arrstore)
 }
 
 /**
- * handle_echo - Handles the "echo" command by printing the arguments to the standard output.
+ * handle_echo - Handles the "echo" command by printing the
+ * arguments to the standard output.
  *
  * @arrstore: The array of arguments for the command.
  * @status: The exit status of the previous command.
@@ -50,7 +51,8 @@ void handle_echo(const char **arrstore, int status)
 }
 
 /**
- * handle_env - Handles the "env" command by printing the environment variables.
+ * handle_env - Handles the "env" command by printing the
+ * environment variables.
  *
  * @arrstore: The array of strings containing the command and its arguments.
  * Return: void.
@@ -80,7 +82,8 @@ void handle_env(const char **arrstore)
  * @dir_size: The size of the directories array.
  * Return: void.
  */
-void handle_execve(const char **arrstore, const char *directories[], size_t dir_size)
+void handle_execve(const char **arrstore, const char
+*directories[], size_t dir_size)
 {
 	size_t i;
 	char prompt_path[1024];
@@ -98,10 +101,10 @@ void handle_execve(const char **arrstore, const char *directories[], size_t dir_
 	}
 	else if (strcmp(arrstore[0], "env") != 0)
 	{
-		for(i = 0; i < dir_size; i++)
+		for (i = 0; i < dir_size; i++)
 		{
 			snfprinter(prompt_path, sizeof(prompt_path), "%s/", directories[i]);
-			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path)- strlen(prompt_path), "%s", arrstore[0]);
+			snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path) - strlen(prompt_path), "%s", arrstore[0]);
 			if (execve(prompt_path, (char * const *)arrstore, environ) != -1)
 			{
 				break;
