@@ -3,6 +3,8 @@
 /**
  * str_concat - concatenates two strings.
  *
+ * Description: function that concatenates two strings.
+ *
  *@s1: pointer to a string.
  *@s2: pointer to a string.
  *
