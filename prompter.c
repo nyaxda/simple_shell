@@ -11,6 +11,7 @@ void prompter(void)
 	if (isatty(STDIN_FILENO))
 	{
 		char *buffer = malloc(sizeof(char) * 1000), prompt[1024];
+
 		if (buffer == NULL)
 		{
 			perror("malloc");
