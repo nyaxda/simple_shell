@@ -1,6 +1,7 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 #define INCREMENT_BUFFER_FACTOR 2
+#define MAX_SIZE 1024
 
 #include <stdio.h>
 #include <string.h>
