@@ -53,9 +53,7 @@ void executor(const char **arrstore)
 			en_output = _getenviron(NULL);
 			snfprinter(buffer, buf_size, "%s\n", en_output);
 			output = strdup(buffer);
-			printf("Before printer function\n");
 			printer(output);
-			printf("After printer function\n");
 			free(en_output);
 			free(output);
 		}
