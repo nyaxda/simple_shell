@@ -15,18 +15,18 @@ void prompter(void)
         if (buffer == NULL)
         {
             perror("malloc");
-            exit(1);
+            exit(EXIT_FAILURE);
         }
         if (getcwd(buffer, 1000) != NULL)
         {
             snprintf(prompt, sizeof(prompt), "($)%s# ", buffer);
             printer(prompt);
-            free(buffer);
         }
         else
         {
+			perror("getcwd");
             printer("($) ");
-            free(buffer);
         }
+		free(buffer);
     }
 }
