@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- * handle_command - Executes the appropriate action based on the command provided.
+ * handle_command - Executes the appropriate action based
+ * on the command provided.
  *
  * @arrstore: An array of strings containing the command and its arguments.
  * @prompt: The prompt string displayed to the user.
@@ -11,8 +12,8 @@ void handle_command(char **arrstore, char *prompt)
 {
 	if (strcmp(arrstore[0], "setenv") == 0)
 	{
-		if(arrstore[1] != NULL && arrstore[2] != NULL)
-			cust_setenv(arrstore[1],arrstore[2]);
+		if (arrstore[1] != NULL && arrstore[2] != NULL)
+			cust_setenv(arrstore[1], arrstore[2]);
 		else
 			handle_error("Insufficient setenv arguments", prompt, arrstore);
 	}
