@@ -20,10 +20,15 @@ int main(void)
 		new_arrstore = input_text(prompt, size);
 		if (new_arrstore == NULL)
 		{
-			free(prompt);
-			if (arrstore != NULL)
-				free(arrstore);
-			return (0);
+			if (isatty(STDIN_FILENO))
+				continue;
+			else
+			{
+				free(prompt);
+				if (arrstore != NULL)
+					free(arrstore);
+				return (0);
+			}
 		}
 		if (arrstore != NULL)
 			free(arrstore);
