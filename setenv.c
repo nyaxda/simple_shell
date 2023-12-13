@@ -10,16 +10,16 @@
  */
 int cust_setenv(const char *name, const char *value)
 {
-    if (name == NULL || name[0] == '\0')
-    {
-        perror("Name not found");
-        return (-1);
-    }
-    if (setenv(name, value, 1) == -1)
-    {
-        perror("Failed to set new Env Variable");
-        return (-1);
-    }
+	if (name == NULL || name[0] == '\0')
+	{
+		perror("Name not found");
+		exit(1);
+	}
+	if (setenv(name, value, 1) == -1)
+	{
+		perror("Failed to set new Env Variable");
+		return (-1);
+	}
     return (0);
 }
 
@@ -31,15 +31,15 @@ int cust_setenv(const char *name, const char *value)
  */
 int cust_unsetenv(const char *name)
 {
-    if (name == NULL || name[0] == '\0')
-    {
-        perror("Name not found");
-        return (-1);
-    }
-    if (unsetenv(name) == -1)
-    {
-        perror("Failed to set Unset Env Var");
-        return (-1);
-    }
-    return (0);
+	if (name == NULL || name[0] == '\0')
+	{
+		perror("Name not found");
+		exit(1);
+	}
+	if (unsetenv(name) == -1)
+	{
+		perror("Failed to set Unset Env Var");
+		return (-1);
+	}
+	return (0);
 }

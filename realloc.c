@@ -1,48 +1,66 @@
 #include "main.h"
 
 /**
- * input_text - Reads input from the user and stores it
- * in the provided buffer.
+ * cust_realoc -  creates reallocates a memory block using malloc and free.
  *
- * Description: it handles the end of file condition,
- * and also removes new line.
- * @prompt: The buffer to store the user input.
- * @extent: The maximum number of characters to read.
+ * Description: function that reallocates a memory block using malloc and free.
+ * The contents are copied to the newly allocated space,
+ * in the range from the start of ptr up
+ * to the minimum of the old and new sizes.
+ * If new_size > old_size, the “added” memory should not be initialized.
+ * If new_size == old_size do not do anything and return ptr.
+ * If ptr is NULL, then the call is equivalent to malloc(new_size),
+ * for all values of old_size and new_size.
+ * If new_size is equal to zero, and ptr is not NULL,
+ * then the call is equivalent to free(ptr).
  *
- * Return: void
+ *
+ *@ptr: pointer to the memory previously allocated with a call to malloc.
+ *@old_size: old size of the allocated space for ptr in bytes.
+ *@new_size: new size of the new memory block in bytes.
+ *
+ * Return: NULL.
  */
-char **input_text(char *prompt, size_t extent)
+void *cust_realoc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	char *placeholder, **arrstore;
-	int i = 0;
+	void *m;
+	char *copy, *f;
+	unsigned int i;
 
-	if (cust_getline(&prompt, &extent, stdin) == -1)
+	if (new_size == old_size)
+		return (ptr);
+
+	if (ptr == NULL)
 	{
-		/*check if it's end of file and there is no more input*/
-		if (feof(stdin))
-		{
+		m = malloc(new_size);
+
+		if (m == NULL)
 			return (NULL);
-		}
-		else
-		{
-			perror("getline error");
-			return (NULL);
-		}
+
+		return (m);
 	}
-	placeholder = cust_strtk(prompt, " \t\n");
-	arrstore = malloc(sizeof(char *) * 1024);
-	if (arrstore == NULL)
+
+	if (new_size == 0 && ptr != NULL)
 	{
+		free(ptr);
 		return (NULL);
 	}
 
-	while (placeholder)
+	copy = ptr;
+	m = malloc(sizeof(*copy) * new_size);
+
+	if (m == NULL)
 	{
-		arrstore[i] = placeholder;
-		placeholder = cust_strtk(NULL, " \t\n");
-		i++;
+		free(ptr);
+		return (NULL);
 	}
-	arrstore[i] = NULL;
-	i = 0;
-	return (arrstore);
+
+	f = m;
+
+	for (i = 0; i < old_size && i < new_size; i++)
+	{
+		f[i] = *copy++;
+	}
+	free(ptr);
+	return (m);
 }
