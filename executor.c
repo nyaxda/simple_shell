@@ -10,9 +10,9 @@ extern char **environ;
 void executor(const char **arrstore)
 {
 	int status, exitstus;
-	size_t i, j;
+	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
-	char prompt_path[1024], numbuff[100],
+	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
 	*exit_code[3] = {"echo", NULL, NULL};
 	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
@@ -47,7 +47,7 @@ void executor(const char **arrstore)
         		}
     		}
 		}
-		/*if (strcmp(arrstore[0], "env") == 0)
+		if (strcmp(arrstore[0], "env") == 0)
 		{
 			buf_size = sizeof(buffer);
 			en_output = _getenviron(NULL);
@@ -56,7 +56,7 @@ void executor(const char **arrstore)
 			printer(output);
 			free(en_output);
 			free(output);
-		}*/
+		}
 		/*child process occurs here*/
 		if (arrstore[0][0] == '/')
     	{
@@ -70,7 +70,7 @@ void executor(const char **arrstore)
 				exit(1);
 			}
     	}
-    	else
+    	else if (strcmp(arrstore[0], "env") != 0)
 		{
 			for(i = 0; i < sizeof(directories)/sizeof(directories[0]); i++)
 			{
