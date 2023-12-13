@@ -1,5 +1,7 @@
 #include "main.h"
 
+static char buffer[BUFFER];
+static size_t buff_offset;
 /**
  * cust_getline - custom getline function
  * @pointer: buffer to store string.
@@ -7,8 +9,6 @@
  * @strm: stream to read from.
  * Return: number of bytes read., -1 on failure.
 */
-static char buffer[1024];
-static size_t buff_offset;
 ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 {
 	size_t data_size, result;
