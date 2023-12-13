@@ -55,7 +55,7 @@ void executor(const char **arrstore)
 			output = strdup(buffer);
 			printf("Before printer function\n");
 			printer(output);
-			printf("Before printer function\n");
+			printf("After printer function\n");
 			free(en_output);
 			free(output);
 		}
