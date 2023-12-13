@@ -2,7 +2,7 @@
 
 /**
  * printer - Prints the given message to the standard output.
- * 
+ *
  * @msg: The message to be printed.
  * Return: void.
  */
