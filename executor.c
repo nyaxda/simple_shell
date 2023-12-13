@@ -14,7 +14,7 @@ void executor(const char **arrstore)
 	pid_t child_process_id = fork();
 	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
 	*exit_code[3] = {"echo", NULL, NULL}, *strlteral;
-	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"}, *strlteral;
+	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
 	if (arrstore[0][0] == '"') 
     {
