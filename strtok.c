@@ -8,10 +8,10 @@
 */
 char *cust_strtk(char *string, const char *dlm)
 {
-	static char *pointer = NULL;
+	static char *pointer;
 	char *tkn;
 
-	if(string != NULL)
+	if (string != NULL)
 	{
 		pointer = string;
 	}
@@ -37,5 +37,5 @@ char *cust_strtk(char *string, const char *dlm)
 		*pointer = '\0';
 		pointer++;
 	}
-	return tkn;
+	return (tkn);
 }
