@@ -4,8 +4,6 @@
  * input_text - Reads input from the user and stores it
  * in the provided buffer.
  *
- * Description: it handles the end of file condition,
- * and also removes new line.
  * @prompt: The buffer to store the user input.
  * @extent: The maximum number of characters to read.
  *
