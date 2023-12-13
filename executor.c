@@ -10,9 +10,9 @@ extern char **environ;
 void executor(const char **arrstore)
 {
 	int status, exitstus;
-	size_t i, j;
+	size_t i, j, buf_size;
 	pid_t child_process_id = fork();
-	char prompt_path[1024], numbuff[100],
+	char prompt_path[1024], *en_output, buffer[1024], *output, numbuff[100],
 	*exit_code[3] = {"echo", NULL, NULL};
 	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
@@ -29,7 +29,7 @@ void executor(const char **arrstore)
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
-		perror("Error");
+		perror("2");
 		exit(1);
 	}
 	else if (child_process_id == 0)
@@ -47,7 +47,7 @@ void executor(const char **arrstore)
         		}
     		}
 		}
-		/*if (strcmp(arrstore[0], "env") == 0)
+		if (strcmp(arrstore[0], "env") == 0)
 		{
 			buf_size = sizeof(buffer);
 			en_output = _getenviron(NULL);
@@ -56,7 +56,7 @@ void executor(const char **arrstore)
 			printer(output);
 			free(en_output);
 			free(output);
-		}*/
+		}
 		/*child process occurs here*/
 		if (arrstore[0][0] == '/')
     	{
@@ -64,7 +64,7 @@ void executor(const char **arrstore)
         	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
         	if (execve(prompt_path, (char * const *)arrstore, environ) == -1)
 			{
-				perror("Error");
+				perror("1");
 				free(arrstore);
 				arrstore = NULL;
 				exit(1);
@@ -87,7 +87,7 @@ void executor(const char **arrstore)
 		}
 		if (i == sizeof(directories)/sizeof(directories[0]))
 		{
-			perror("Error");
+			perror("3");
 			/*free arrstore memory and exit the child process*/
 			free(arrstore);
 			exit(1);
@@ -96,8 +96,6 @@ void executor(const char **arrstore)
 	else
 		wait(&status);
 	if (WIFEXITED(status))
-	{
 			exitstus = WEXITSTATUS(status);
-			exit(exitstus);
-	}
+		/*snfprinter(prompt_path, sizeof(prompt_path), "/bin/%s", arrstore[0]);*/
 }
