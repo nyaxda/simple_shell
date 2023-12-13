@@ -29,7 +29,7 @@ void executor(const char **arrstore)
 	/* child process has failed to initiate*/
 	if (child_process_id == -1)
 	{
-		perror("Error");
+		perror("2");
 		exit(1);
 	}
 	else if (child_process_id == 0)
@@ -64,7 +64,7 @@ void executor(const char **arrstore)
         	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
         	if (execve(prompt_path, (char * const *)arrstore, environ) == -1)
 			{
-				perror("Error");
+				perror("1");
 				free(arrstore);
 				arrstore = NULL;
 				exit(1);
@@ -87,7 +87,7 @@ void executor(const char **arrstore)
 		}
 		if (i == sizeof(directories)/sizeof(directories[0]))
 		{
-			perror("Error");
+			perror("3");
 			/*free arrstore memory and exit the child process*/
 			free(arrstore);
 			exit(1);
