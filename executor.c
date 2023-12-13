@@ -94,7 +94,7 @@ void executor(const char **arrstore)
         		{
             		strlteral[strlen(strlteral) - 1] = '\0';
         		}
-				fprintf(stderr, "./hsh: %d: %s: not found\n", EXIT_FAILURE, arrstore[0]);
+				fprintf(stderr, "./hsh: %d: %s: not found\n", EXIT_FAILURE, strlteral);
 				free(arrstore);
 				free(strlteral);
 				exit(1);
