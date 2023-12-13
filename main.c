@@ -37,7 +37,7 @@ int main(void)
 				}
 			}
 				status = 0;
-				free(arrstore)
+				free(arrstore);
 		}
 		for (i = 0; arrstore[i] != NULL; i++)
 			free(arrstore[i]);

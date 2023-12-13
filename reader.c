@@ -16,10 +16,6 @@ char **input_text(char *prompt, size_t extent)
 	char *placeholder, **arrstore;
 	int i = 0;
 
-	if (buffer == NULL)
-	{
-		return (NULL);
-	}
 	free(prompt);
 	prompt = NULL;
 	if (cust_getline(&prompt, &extent, stdin) == -1)
