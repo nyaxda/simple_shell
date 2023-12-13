@@ -7,52 +7,32 @@
  * @strm: stream to read from.
  * Return: number of bytes read., -1 on failure.
 */
+static char buffer[BUFFER];
+static size_t buff_offset;
 ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 {
-	static char *buffer;
-	static size_t buff_offset = 0;
-	size_t buff_size = *n, data_size, rem_buff_size = *n, old_size, result;
-	if (buffer == NULL)
-	{
-		buffer = malloc(sizeof(char) * (*n));
-		if (buffer == NULL)
-			return (-1);
-	}
-	while (fgets(buffer + buff_offset, rem_buff_size, strm) != NULL)
-	{
-		data_size = strlen(buffer + buff_offset);
-		if (data_size + buff_offset >= buff_size)
-		{
-			old_size = buff_size;
-			buff_size *= INCREMENT_BUFFER_FACTOR;
-			rem_buff_size = buff_size - buff_offset;
-			buffer = cust_realoc(buffer, old_size, buff_size);
-			if (buffer == NULL)
-				return (-1);
-		}
-		rem_buff_size = buff_size - buff_offset;
+    size_t data_size, result;
 
-		if (buffer[buff_offset - 1] == '\n')
-		{
-			if (rem_buff_size <= 1)
-			{
-				old_size = buff_size;
-				buff_size *= INCREMENT_BUFFER_FACTOR;
-				rem_buff_size = buff_size - buff_offset;
-				buffer = cust_realoc(buffer, old_size, buff_size);
-				if (buffer == NULL)
-					return (-1);
-			}
-			buffer[buff_offset] = '\n';
-			buff_offset++;
-			rem_buff_size--;
-		}
+   while (1) 
+   {
+    	if (buff_offset == BUFFER_SIZE)
+        	buff_offset = 0;
+
+    	if (fgets(buffer + buff_offset, BUFFER_SIZE - buff_offset, strm) == NULL) 
+        	break;
+
+    	data_size = strlen(buffer + buff_offset);
+
+    	if (buffer[buff_offset + data_size - 1] == '\n')
+        break;
 		else
-			break;
+        buff_offset += data_size;
 	}
-	*pointer = buffer;
-	*n = buff_size;
-	result = (ssize_t)buff_offset;
-	buff_offset = 0;
-	return (result);
+
+*pointer = buffer;
+*n = buff_offset;
+result = (ssize_t)buff_offset;
+buff_offset = 0; 
+
+return (result);
 }
