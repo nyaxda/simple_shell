@@ -1,7 +1,7 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 #define INCREMENT_BUFFER_FACTOR 2
-#define BUFFER 1024;
+#define BUFFER 1024
 
 #include <stdio.h>
 #include <string.h>
