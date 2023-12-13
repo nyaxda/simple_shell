@@ -5,7 +5,6 @@
  *
  * @name: environment variable name.
  * @value: value to be assigned.
- * @overwrite: Flag indicator. 1 to overwrite and 0 not to overwrite.
  * Return: 0 on success, -1 on failure.
  */
 int cust_setenv(const char *name, const char *value)
