@@ -11,31 +11,31 @@ static char buffer[BUFFER];
 static size_t buff_offset;
 ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 {
-    size_t data_size, result;
+	size_t data_size, result;
 
-   while (1) 
+   while (1)
    {
-    	if (buff_offset == BUFFER)
-        	buff_offset = 0;
+		if (buff_offset == BUFFER)
+			buff_offset = 0;
 
-    	if (fgets(buffer + buff_offset, BUFFER - buff_offset, strm) == NULL) 
+		if (fgets(buffer + buff_offset, BUFFER - buff_offset, strm) == NULL)
 		{
 			if (feof(strm))
 				return (-1);
 			else
 				return (-1);
 		}
-    	data_size = strlen(buffer + buff_offset);
+		data_size = strlen(buffer + buff_offset);
 
-    	if (buffer[buff_offset + data_size - 1] == '\n')
-        	break;
+		if (buffer[buff_offset + data_size - 1] == '\n')
+			break;
 		else
-        	buff_offset += data_size;
+			buff_offset += data_size;
 	}
 
 	*pointer = buffer;
 	*n = buff_offset;
 	result = (ssize_t)buff_offset;
-	buff_offset = 0; 
+	buff_offset = 0;
 	return (result);
 }
