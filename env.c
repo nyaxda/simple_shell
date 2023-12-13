@@ -112,16 +112,17 @@ char *process_env_var(char *environ_var, const char *current, char *output)
 	}
 	free(environ_var);
 
-	return output;
+	return (output);
 }
 
 /**
- * _getenviron - Retrieves the value of an environment variable that matches the given current variable.
+ * _getenviron - Retrieves the value of an environment variable
+ * that matches the given current variable.
  *
  * @current: The current variable to match.
  * Return: The processed output of the matching environment variable.
  */
-extern char **environ;
+
 char *_getenviron(const char *current)
 {
 	char *environ_var;

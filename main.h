@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+extern char **environ;
 void prompter(void);
 void printer(const char *msg);
 char **input_text(char *prompt, size_t extent);
