@@ -37,12 +37,10 @@ int main(void)
 				}
 			}
 				status = 0;
-				free(arrstore);
 		}
 		for (i = 0; arrstore[i] != NULL; i++)
 			free(arrstore[i]);
 		free(arrstore);
-		arrstore = NULL;
 	}
 	free(prompt);
 	return (0);
