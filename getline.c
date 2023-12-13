@@ -14,7 +14,7 @@ ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 	size_t data_size, result;
 
 	while (1)
-   	{
+	{
 		if (buff_offset == BUFFER)
 			buff_offset = 0;
 
