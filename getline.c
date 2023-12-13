@@ -7,7 +7,7 @@
  * @strm: stream to read from.
  * Return: number of bytes read., -1 on failure.
 */
-static char buffer[BUFFER];
+static char buffer[1024];
 static size_t buff_offset;
 ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
 {
