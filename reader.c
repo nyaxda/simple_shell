@@ -13,12 +13,9 @@
  */
 char **input_text(char *prompt, size_t extent)
 {
-	char placeholder[MAX_SIZE], **arrstore = malloc(MAX_SIZE * sizeof(char *));
-	int i = 0, j;
+	char *placeholder, **arrstore = NULL;
+	int i = 0;
 
-	if(arrstore == NULL)
-		return (NULL);
-	
 	free(prompt);
 	prompt = NULL;
 	if (cust_getline(&prompt, &extent, stdin) == -1)
@@ -34,21 +31,19 @@ char **input_text(char *prompt, size_t extent)
 			return (NULL);
 		}
 	}
-	strncpy(placeholder, cust_strtk(prompt, " \t\n"), MAX_SIZE);
-	while (placeholder[0] != '\0')
+	placeholder = cust_strtk(prompt, " \t\n");
+	arrstore = malloc(sizeof(char *) * 1024);
+	if (arrstore == NULL)
 	{
-		arrstore[i] = malloc(MAX_SIZE);
-		if (arrstore[i] == NULL)
-		{
-			for(j = 0; j < i; j++)
-				free(arrstore[j]);
-			free(arrstore);
-			free(prompt);
-			return (NULL);
-		}
-		strncpy(arrstore[i], placeholder, MAX_SIZE);
-        strncpy(placeholder, cust_strtk(NULL, " \t\n"), MAX_SIZE);
-        i++;
+		free(prompt);
+		return (NULL);
+	}
+
+	while (placeholder)
+	{
+		arrstore[i] = placeholder;
+		placeholder = cust_strtk(NULL, " \t\n");
+		i++;
 	}
 	arrstore[i] = NULL;
 	i = 0;
