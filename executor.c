@@ -12,7 +12,7 @@ void executor(const char **arrstore)
 	int status, exitstus;
 	size_t i, j;
 	pid_t child_process_id = fork();
-	char prompt_path[1024], buffer[1024], *output, numbuff[100],
+	char prompt_path[1024], numbuff[100],
 	*exit_code[3] = {"echo", NULL, NULL};
 	const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
 
