@@ -28,5 +28,8 @@ void print_integer(int h, char *s);
 int cust_unsetenv(const char *name);
 int cust_setenv(const char *name, const char *value);
 int cust_cd(char *path);
+char *concatenate_strings(char *output, char *new_output);
+char *process_value(char *value, char *new_output);
+char *process_env_var(char *environ_var, const char *current, char *output);
 #endif /*MAIN_H_*/
  
