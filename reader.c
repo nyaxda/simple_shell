@@ -38,9 +38,12 @@ char **input_text(char *prompt, size_t extent)
 
 	while (placeholder)
 	{
-		arrstore[i] = placeholder;
+		if (strlen (placeholder) > 0)
+		{
+			arrstore[i] = placeholder;
+			i++;
+		}
 		placeholder = cust_strtk(NULL, " \t\n");
-		i++;
 	}
 	arrstore[i] = NULL;
 	i = 0;
