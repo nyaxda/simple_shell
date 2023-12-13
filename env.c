@@ -22,14 +22,15 @@ char *concatenate_strings(char *output, char *new_output)
 		output = strdup(new_output);
 	}
 
-	return output;
+	return (output);
 }
 
 /**
  * process_value - Processes a value and appends it to a new output string.
- * 
+ *
  * @value: The value to be processed.
- * @new_output: The new output string to which the processed value will be appended.
+ * @new_output: The new output string to which the processed
+ * value will be appended.
  * Return: The updated new output string.
  */
 char *process_value(char *value, char *new_output)
@@ -61,12 +62,13 @@ char *process_value(char *value, char *new_output)
 	new_output = str_concat(new_output, temp);
 	free(temp);
 
-	return new_output;
+	return (new_output);
 }
 
 /**
- * process_env_var - Processes an environment variable and appends its value to the output string.
- * 
+ * process_env_var - Processes an environment variable and
+ * appends its value to the output string.
+ *
  * @environ_var: The environment variable to process.
  * @current: The current variable to match against.
  * @output: The output string to append the processed value to.
@@ -91,7 +93,7 @@ char *process_env_var(char *environ_var, const char *current, char *output)
 		value = NULL;
 	}
 
-	if (current == NULL || (name && strcmp(name,current) == 0))
+	if (current == NULL || (name && strcmp(name, current) == 0))
 	{
 		if (name)
 		{
@@ -115,15 +117,16 @@ char *process_env_var(char *environ_var, const char *current, char *output)
 
 /**
  * _getenviron - Retrieves the value of an environment variable that matches the given current variable.
- * 
+ *
  * @current: The current variable to match.
  * Return: The processed output of the matching environment variable.
  */
+extern char **environ;
 char *_getenviron(const char *current)
 {
-	extern char **environ;
 	char *environ_var;
-	char *output = NULL;	int i = 0;
+	char *output = NULL;
+	int i = 0;
 
 	while (environ[i])
 	{
