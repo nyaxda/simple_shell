@@ -6,40 +6,55 @@
 */
 int main(void)
 {
-	int i, status = 0;
-	char prompt[MAX_SIZE], *arrstore[MAX_SIZE], prompt_path[MAX_SIZE], **input;
-	
+	int size = 1024;
+	char **arrstore = malloc(sizeof(char) * 1024);
+	char *prompt = malloc(sizeof(char) * 1024);
+
+	if (arrstore == NULL || prompt == NULL)
+	{
+		return (0);
+	}
 	while (1)
 	{
 		prompter();
-		input = input_text(prompt, MAX_SIZE);
-		if (input == NULL)
+		arrstore = input_text(prompt, size);
+		if (arrstore == NULL)
 		{
+			free(prompt);
 			return (0);
 		}
 		/*checking if the command is not empty*/
-		if (input[0] != NULL)
-        {
-            for (i = 0; i < MAX_SIZE && input[i] != NULL; i++)
-            {
-                arrstore[i] = input[i];
-            }
-			arrstore[i] = NULL;
-			if (command_handler(arrstore, status) == 0)
+		if (arrstore[0] != NULL)
+		{
+			if (strcmp(arrstore[0], "setenv") == 0)
 			{
-				strncpy(prompt_path, parser(arrstore), MAX_SIZE);
-				if (prompt_path[0] != '\0')
+				if(arrstore[1] != NULL && arrstore[2] != NULL)
+					cust_setenv(arrstore[1],arrstore[2]);
+				else
 				{
-					status = executor((const char **)arrstore, prompt_path);
+					perror("Insufficient setenv arguments");
+					exit (1);
 				}
 			}
-				status = 0;
+			else if (strcmp(arrstore[0], "unsetenv") == 0)
+			{
+				if (arrstore[1] != NULL)
+        			cust_unsetenv(arrstore[1]);
+				else
+				{
+					perror("Insufficient unsetenv arguments");
+					exit (1);
+				}
+			}
+			else if (strcmp(arrstore[0], "cd") == 0)
+			{
+					cust_cd(arrstore[1]);
+			}
+			else
+				executor((const char **)arrstore);
 		}
-		for (i = 0; arrstore[i] != NULL; i++)
-			arrstore[i][0] = '\0';
-		for (i = 0; input[i] != NULL; i++)
-            free(input[i]);
-        free(input);
+		free(arrstore);
 	}
+	free(prompt);
 	return (0);
 }

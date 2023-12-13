@@ -13,11 +13,9 @@
  */
 char **input_text(char *prompt, size_t extent)
 {
-	char *placeholder, **arrstore = NULL;
+	char *placeholder, **arrstore;
 	int i = 0;
 
-	free(prompt);
-	prompt = NULL;
 	if (cust_getline(&prompt, &extent, stdin) == -1)
 	{
 		/*check if it's end of file and there is no more input*/
@@ -35,7 +33,6 @@ char **input_text(char *prompt, size_t extent)
 	arrstore = malloc(sizeof(char *) * 1024);
 	if (arrstore == NULL)
 	{
-		free(prompt);
 		return (NULL);
 	}
 
@@ -47,6 +44,5 @@ char **input_text(char *prompt, size_t extent)
 	}
 	arrstore[i] = NULL;
 	i = 0;
-	free(prompt);
 	return (arrstore);
 }
