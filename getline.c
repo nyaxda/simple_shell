@@ -18,7 +18,7 @@ ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
     	if (buff_offset == BUFFER)
         	buff_offset = 0;
 
-    	if (fgets(buffer + buff_offset, BUFFER_SIZE - buff_offset, strm) == NULL) 
+    	if (fgets(buffer + buff_offset, BUFFER - buff_offset, strm) == NULL) 
         	break;
 
     	data_size = strlen(buffer + buff_offset);
