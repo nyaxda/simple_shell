@@ -6,6 +6,7 @@
  * @arrstore: The array of command arguments to be executed.
  * Return: void
  */
+extern char **environ;
 void executor(const char **arrstore)
 {
 	int status, exitstus;
@@ -61,7 +62,7 @@ void executor(const char **arrstore)
     	{
         	/* If the command starts with '/', assume it's an absolute path */
         	snprintf(prompt_path, sizeof(prompt_path), "%s", arrstore[0]);
-        	if (execve(prompt_path, (char * const *)arrstore, NULL) == -1)
+        	if (execve(prompt_path, (char * const *)arrstore, environ) == -1)
 			{
 				perror("Error");
 				free(arrstore);
@@ -78,7 +79,7 @@ void executor(const char **arrstore)
 				directories[i]);
 				snfprinter(prompt_path + strlen(prompt_path),
 				sizeof(prompt_path)- strlen(prompt_path), "%s", arrstore[0]);
-				if (execve(prompt_path, (char * const *)arrstore, NULL) != -1)
+				if (execve(prompt_path, (char * const *)arrstore, environ) != -1)
 				{
 					break;
 				}
