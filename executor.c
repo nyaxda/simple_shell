@@ -53,7 +53,7 @@ void handle_env(const char **arrstore)
     }
 }
 
-void handle_execve(const char **arrstore, const char *directories[])
+void handle_execve(const char **arrstore, const char *directories[], size_t dir_size)
 {
     size_t i;
     char prompt_path[1024];
@@ -71,7 +71,7 @@ void handle_execve(const char **arrstore, const char *directories[])
     }
     else if (strcmp(arrstore[0], "env") != 0)
     {
-        for(i = 0; i < sizeof(directories)/sizeof(directories[0]); i++)
+        for(i = 0; i < dir_size; i++)
         {
             snfprinter(prompt_path, sizeof(prompt_path), "%s/", directories[i]);
             snfprinter(prompt_path + strlen(prompt_path), sizeof(prompt_path)- strlen(prompt_path), "%s", arrstore[0]);
@@ -81,7 +81,7 @@ void handle_execve(const char **arrstore, const char *directories[])
             }
         }
     }
-    if (i == sizeof(directories)/sizeof(directories[0]))
+    if (i == dir_size)
     {
         perror("Error");
         free(arrstore);
@@ -94,6 +94,7 @@ void executor(const char **arrstore)
     int status, exitstus;
     pid_t child_process_id = fork();
     const char *directories[] = {"/bin", "/usr/bin", "/usr/sbin", "/sbin"};
+    size_t dir_size = sizeof(directories) / sizeof(directories[0]);
 
     handle_exit(arrstore);
 
@@ -106,7 +107,7 @@ void executor(const char **arrstore)
     {
         handle_echo(arrstore, status);
         handle_env(arrstore);
-        handle_execve(arrstore, directories);
+        handle_execve(arrstore, directories, dir_size);
     }
     else
         wait(&status);
