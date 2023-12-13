@@ -21,7 +21,7 @@ void executor(const char **arrstore)
         strlteral = arrstore[0] + 1;
         if (strlteral[strlen(strlteral) - 1] == '"') 
         {
-            fprintf(stderr, "./hsh: %d: %s: not found\n", 1, literal);
+            fprintf(stderr, "./hsh: %d: %s: not found\n", 1, strlteral);
             return;
         }
     }
