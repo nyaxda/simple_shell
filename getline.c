@@ -19,20 +19,23 @@ ssize_t cust_getline(char **pointer, size_t *n, FILE *strm)
         	buff_offset = 0;
 
     	if (fgets(buffer + buff_offset, BUFFER - buff_offset, strm) == NULL) 
-        	break;
-
+		{
+			if (feof(strm))
+				return (-1);
+			else
+				return (-1);
+		}
     	data_size = strlen(buffer + buff_offset);
 
     	if (buffer[buff_offset + data_size - 1] == '\n')
-        break;
+        	break;
 		else
-        buff_offset += data_size;
+        	buff_offset += data_size;
 	}
 
-*pointer = buffer;
-*n = buff_offset;
-result = (ssize_t)buff_offset;
-buff_offset = 0; 
-
-return (result);
+	*pointer = buffer;
+	*n = buff_offset;
+	result = (ssize_t)buff_offset;
+	buff_offset = 0; 
+	return (result);
 }
