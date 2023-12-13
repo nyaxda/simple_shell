@@ -1,4 +1,4 @@
-#inlcude "main.h"
+#include "main.h"
 
 void handle_exit(const char **arrstore)
 {
