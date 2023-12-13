@@ -104,7 +104,6 @@ void executor(const char **arrstore)
 				fprintf(stderr, "./hsh: %d: %s: not found\n", EXIT_FAILURE, arrstore[0]);
 				/*free arrstore memory and exit the child process*/
 				free(arrstore);
-				free(strlteral);
 				exit(1);
 			}
 		}
