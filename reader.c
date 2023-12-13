@@ -36,7 +36,7 @@ char **input_text(char *prompt, size_t extent)
 
 	while (placeholder)
 	{
-		if (strlen (placeholder) > 0)
+		if (strlen(placeholder) > 0)
 		{
 			arrstore[i] = placeholder;
 			i++;
