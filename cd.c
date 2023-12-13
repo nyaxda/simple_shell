@@ -21,7 +21,11 @@ int cust_cd(char *path)
     else if (strcmp(path, "-") == 0)
     {
         if (switcher != NULL)
+        {
+            free(switcher);
+            switcher = temp;
             path = switcher;
+        }
         else
         {
             free(temp);
@@ -35,7 +39,5 @@ int cust_cd(char *path)
         perror("Error");
         return (-1);
     }
-    free(switcher);
-    switcher = temp;
     return (0);
 }

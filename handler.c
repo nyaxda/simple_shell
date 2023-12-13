@@ -12,7 +12,7 @@ int command_handler(char **arrstore, int status)
         else
         {
             perror("Insufficient setenv arguments");
-            exit (1);
+            return (1);
         }
         return (1);
     }
@@ -23,7 +23,7 @@ int command_handler(char **arrstore, int status)
         else
         {
             perror("Insufficient unsetenv arguments");
-            exit (1);
+            return (1);
         }
         return (1);
     }
@@ -41,6 +41,11 @@ int command_handler(char **arrstore, int status)
             if (strcmp(arrstore[j], "$?") == 0)
             {
                 numbuff = malloc(sizeof(char *) * 100);
+                if (numbuff == NULL)
+                {
+                    perror("Error: Memory allocation failed");
+                    return(1);
+                }
                 sprintf(numbuff, "%d", WEXITSTATUS(status));
                 printer(numbuff);
                 free(numbuff);
@@ -55,8 +60,8 @@ int command_handler(char **arrstore, int status)
         buffer = malloc(sizeof(char) * 1024);
         if (buffer == NULL)
         {
-            perror("Error: Mem allocation failed");
-            exit(1);
+            perror("Error: Memory allocation failed");
+            return(1);
         }
         snprintf(buffer, 1024, "%s\n", env_output);
         printer(buffer);

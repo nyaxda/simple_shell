@@ -9,6 +9,12 @@ int main(void)
 	int size = 1024, i, status = 0;
 	char *prompt = malloc(sizeof(char) * 1024), **arrstore;
 
+	if (prompt == NULL)
+	{
+		perror("Error: Memory allocation to prompt failed");
+		return (1);
+	}
+	
 	while (1)
 	{
 		prompter();
@@ -23,6 +29,8 @@ int main(void)
 		{
 			if (command_handler(arrstore, status) == 0)
 				status = executor((const char **)arrstore);
+			else
+				status = 0;
 		}
 		for (i = 0; arrstore[i] != NULL; i++)
 			free(arrstore[i]);

@@ -13,6 +13,11 @@ int executor(const char **arrstore)
 		return (-1);
 	}
 	path = strdup(getenv("PATH"));
+	if (path == NULL)
+	{
+		perror("Error: path not found");
+		return (-1);
+	}
 	token = cust_strtk(path, ":");
 	for (i = 0; token != NULL; i++)
 	{
@@ -48,7 +53,7 @@ int executor(const char **arrstore)
 		if	(child_process_id == -1)
 		{
 			perror("Fork Error");
-			exit(0);
+			status = -1;
 		}
 		else if (child_process_id == 0)
 		{
@@ -59,11 +64,19 @@ int executor(const char **arrstore)
 			}
 		}
 		else
-		wait(&status);
+		{
+			if (wait(&status) == -1)
+			{
+				perror("Wait Error");
+				status = -1;
+			}
+		}
+
 	}
 	else
 	{
 		perror("4");
+		status = -1;
 	}
 	for (i = 0; directories[i] != NULL; i++)
 		free(directories[i]);
