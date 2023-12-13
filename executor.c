@@ -87,10 +87,26 @@ void executor(const char **arrstore)
 		}
 		if (i == sizeof(directories)/sizeof(directories[0]))
 		{
-			perror("3");
-			/*free arrstore memory and exit the child process*/
-			free(arrstore);
-			exit(1);
+			 if (arrstore[0][0] == '"') 
+    		{
+       			strlteral = strdup(arrstore[0] + 1);
+        		if (strlteral[strlen(strlteral) - 1] == '"') 
+        		{
+            		strlteral[strlen(strlteral) - 1] = '\0';
+        		}
+				fprintf(stderr, "./hsh: %d: %s: not found\n", EXIT_FAILURE, arrstore[0]);
+				free(arrstore);
+				free(strlteral);
+				exit(1);
+    		}
+			else
+			{
+				fprintf(stderr, "./hsh: %d: %s: not found\n", EXIT_FAILURE, arrstore[0]);
+				/*free arrstore memory and exit the child process*/
+				free(arrstore);
+				free(strlteral);
+				exit(1);
+			}
 		}
 	}
 	else
