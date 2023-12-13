@@ -7,7 +7,7 @@
 int main(void)
 {
 	int size = 1024, i, status = 0;
-	char *prompt = malloc(sizeof(char) * 1024), **arrstore;
+	char *prompt = malloc(sizeof(char) * 1024), **arrstore, *prompt_path;
 
 	if (prompt == NULL)
 	{
