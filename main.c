@@ -37,7 +37,9 @@ int main(void)
 		}
 		for (i = 0; arrstore[i] != NULL; i++)
 			arrstore[i][0] = '\0';
-		free(input);
+		for (i = 0; input[i] != NULL; i++)
+            free(input[i]);
+        free(input);
 	}
 	return (0);
 }
