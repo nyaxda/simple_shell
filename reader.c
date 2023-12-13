@@ -13,7 +13,7 @@
  */
 char **input_text(char *prompt, size_t extent)
 {
-	char *placeholder, **arrstore;
+	char *placeholder, **arrstore = NULL;
 	int i = 0;
 
 	free(prompt);
